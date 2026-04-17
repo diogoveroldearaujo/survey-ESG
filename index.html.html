@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questionário — Sustentabilidade e Reporte ESG nas PMEs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F9FB;
+    --white: #FFFFFF;
+    --border: #E2E6EA;
+    --text: #1A2332;
+    --muted: #6B7A8D;
+    --accent: #0A6B3D;
+    --accent-light: #E8F5EE;
+    --accent-mid: rgba(10,107,61,0.2);
+    --blue: #1A56DB;
+    --error: #DC2626;
+    --radius: 8px;
+    --shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.6; }
+
+  .top-bar { background: var(--accent); height: 5px; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
+  .progress-fill { height: 100%; background: #5BE89C; transition: width 0.4s ease; width: 0%; }
+
+  .header { background: var(--white); border-bottom: 1px solid var(--border); padding: 28px 0; }
+  .header-inner { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+  .header-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .header-title { font-size: 1.35rem; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.3; }
+  .header-sub { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+  .header-meta { display: flex; gap: 20px; margin-top: 14px; flex-wrap: wrap; }
+  .meta-pill { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.06em; color: var(--muted); background: var(--bg); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; }
+
+  .container { max-width: 680px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* QUESTION CARDS */
+  .q-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px 32px; margin-bottom: 16px; box-shadow: var(--shadow);
+    opacity: 0; transform: translateY(16px); transition: all 0.4s ease;
+  }
+  .q-card.visible { opacity: 1; transform: translateY(0); }
+  .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .q-text { font-size: 1rem; font-weight: 500; color: var(--text); margin-bottom: 6px; line-height: 1.5; }
+  .q-text .req { color: var(--error); margin-left: 2px; }
+  .q-sub { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+
+  /* RADIO / CHECKBOX */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt-label {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 16px; border: 1px solid var(--border); border-radius: 6px;
+    cursor: pointer; transition: all 0.15s; user-select: none;
+    font-size: 0.9rem; line-height: 1.4;
+  }
+  .opt-label:hover { border-color: var(--accent); background: var(--accent-light); }
+  .opt-label input { display: none; }
+  .opt-label.selected { border-color: var(--accent); background: var(--accent-light); }
+  .opt-indicator {
+    width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%;
+    flex-shrink: 0; margin-top: 1px; transition: all 0.15s; position: relative;
+  }
+  .opt-label.checkbox .opt-indicator { border-radius: 4px; }
+  .opt-label.selected .opt-indicator { border-color: var(--accent); background: var(--accent); }
+  .opt-label.selected .opt-indicator::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 6px; height: 6px; background: white; border-radius: 50%;
+  }
+  .opt-label.checkbox.selected .opt-indicator::after {
+    content: '✓'; width: auto; height: auto; background: none; border-radius: 0;
+    color: white; font-size: 10px; font-weight: 700;
+  }
+
+  /* SELECT */
+  select, textarea, input[type="text"], input[type="number"] {
+    width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px;
+    font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--text);
+    background: var(--white); outline: none; transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7A8D' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+  select:focus, textarea:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-mid); }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+  /* SCALE */
+  .scale-wrap { margin-top: 4px; }
+  .scale-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--muted); margin-bottom: 10px; }
+  .scale-options { display: flex; gap: 6px; }
+  .scale-btn {
+    flex: 1; padding: 10px 4px; border: 1px solid var(--border); border-radius: 6px;
+    text-align: center; cursor: pointer; font-size: 0.875rem; font-weight: 500;
+    transition: all 0.15s; font-family: 'IBM Plex Mono', monospace; color: var(--muted);
+  }
+  .scale-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .scale-btn.selected { border-color: var(--accent); background: var(--accent); color: white; }
+
+  /* PRICE GRID */
+  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .price-card {
+    border: 1px solid var(--border); border-radius: 6px; padding: 16px;
+    cursor: pointer; transition: all 0.15s; text-align: center;
+  }
+  .price-card:hover { border-color: var(--accent); background: var(--accent-light); }
+  .price-card.selected { border-color: var(--accent); background: var(--accent-light); }
+  .price-card .price { font-family: 'IBM Plex Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--text); }
+  .price-card.selected .price { color: var(--accent); }
+  .price-card .price-desc { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+  /* SECTION DIVIDER */
+  .section-divider { padding: 24px 0 8px; }
+  .sec-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .sec-title { font-size: 1.05rem; font-weight: 600; color: var(--text); }
+  .sec-line { height: 2px; background: linear-gradient(to right, var(--accent), transparent); margin-top: 10px; margin-bottom: 4px; }
+
+  /* SUBMIT */
+  .submit-area { margin-top: 32px; }
+  .btn-submit {
+    width: 100%; padding: 16px; background: var(--accent); color: white;
+    border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif;
+    font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .btn-submit:hover { opacity: 0.88; }
+  .submit-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
+
+  /* THANK YOU */
+  #thankyou { display: none; text-align: center; padding: 80px 24px; max-width: 520px; margin: 0 auto; }
+  .ty-icon { font-size: 3rem; margin-bottom: 20px; }
+  .ty-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
+  .ty-sub { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+  /* CONSENT */
+  .consent-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+  .consent-box strong { color: var(--text); }
+
+  @media(max-width:600px){
+    .q-card { padding: 20px 18px; }
+    .price-grid { grid-template-columns: 1fr; }
+    .scale-options { gap: 3px; }
+    .header-inner { padding: 0 16px; }
+    .container { padding: 24px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="progress-fill" id="progressBar"></div></div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-tag">VSME AutoReport · Estudo de Mercado</div>
+    <div class="header-title">Sustentabilidade e Reporte ESG nas PMEs Portuguesas</div>
+    <div class="header-sub">Estamos a desenvolver uma ferramenta que transforma o SAF-T de contabilidade num relatório de sustentabilidade (VSME) automático. Este questionário ajuda-nos a perceber se resolve um problema real. Demora cerca de 4 minutos.</div>
+    <div class="header-meta">
+      <span class="meta-pill">⏱ ~4 minutos</span>
+      <span class="meta-pill">🔒 Anónimo e confidencial</span>
+      <span class="meta-pill">📋 12 perguntas</span>
+    </div>
+  </div>
+</div>
+
+<form class="container" id="formArea" action="https://formspree.io/f/mojydeyj" method="POST">
+<!-- Campos de configuração Formspree -->
+<input type="hidden" name="_subject" value="Survey PME — Nova resposta VSME AutoReport">
+<input type="hidden" name="_next" value="">
+<input type="hidden" name="_language" value="pt">
+
+  <!-- SECÇÃO A: PERFIL -->
+  <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
+    <div class="sec-label">Secção A</div>
+    <div class="sec-title">Perfil da Empresa</div>
+    <div class="sec-line"></div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">2 perguntas</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 1 de 12</div>
+    <div class="q-text">Qual é o sector principal da sua empresa? <span class="req">*</span></div>
+    <select id="q1" name="q1_sector" onchange="updateProgress()">
+      <option value="">Seleccione...</option>
+      <option>Agroalimentar / Bebidas</option>
+      <option>Indústria Transformadora</option>
+      <option>Comércio por Grosso</option>
+      <option>Comércio a Retalho</option>
+      <option>Construção / Imobiliário</option>
+      <option>Transportes / Logística</option>
+      <option>Tecnologia / Software</option>
+      <option>Serviços Profissionais</option>
+      <option>Turismo / Hotelaria</option>
+      <option>Têxtil / Moda</option>
+      <option>Outro</option>
+    </select>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 2 de 12</div>
+    <div class="q-text">Quantos trabalhadores tem a empresa? <span class="req">*</span></div>
+    <div class="options" id="q2">
+      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div> Menos de 10 (micro)</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div> 10 a 49 (pequena)</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div> 50 a 249 (média)</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div> 250 ou mais</label>
+    </div>
+  </div>
+
+  <!-- SECÇÃO B: PRESSÃO ESG -->
+  <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
+    <div class="sec-label">Secção B</div>
+    <div class="sec-title">Pressão ESG que a Empresa Sente</div>
+    <div class="sec-line"></div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">3 perguntas</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 3 de 12</div>
+    <div class="q-text">Já lhe pediram dados ou relatórios de sustentabilidade (ESG)? <span class="req">*</span></div>
+    <div class="q-sub">Seleccione todas as que se aplicam</div>
+    <div class="options" id="q3">
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q3',true)"><input type="checkbox"><div class="opt-indicator"></div> Sim, por um cliente nacional (retalhista, empresa grande)</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q3',true)"><input type="checkbox"><div class="opt-indicator"></div> Sim, por um cliente internacional (exportações)</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q3',true)"><input type="checkbox"><div class="opt-indicator"></div> Sim, pelo banco (crédito, financiamento)</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q3',true)"><input type="checkbox"><div class="opt-indicator"></div> Sim, por uma entidade pública (concurso, apoio)</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q3',true)"><input type="checkbox"><div class="opt-indicator"></div> Não, ainda não me pediram</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q3',true)"><input type="checkbox"><div class="opt-indicator"></div> Não sei / não tenho a certeza</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 4 de 12</div>
+    <div class="q-text">Em que medida sente pressão crescente para reportar dados de sustentabilidade nos próximos 2 anos? <span class="req">*</span></div>
+    <div class="scale-wrap">
+      <div class="scale-labels"><span>Nenhuma pressão</span><span>Pressão muito alta</span></div>
+      <div class="scale-options" id="q4">
+        <div class="scale-btn" onclick="selectScale(this,'q4')">1</div>
+        <div class="scale-btn" onclick="selectScale(this,'q4')">2</div>
+        <div class="scale-btn" onclick="selectScale(this,'q4')">3</div>
+        <div class="scale-btn" onclick="selectScale(this,'q4')">4</div>
+        <div class="scale-btn" onclick="selectScale(this,'q4')">5</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 5 de 12</div>
+    <div class="q-text">Qual das seguintes situações descreve melhor a sua empresa? <span class="req">*</span></div>
+    <div class="options" id="q5">
+      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div> Já fomos obrigados a reportar ESG e foi complicado</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div> Ainda não fomos obrigados, mas esperamos que aconteça em breve</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div> Não sentimos esta pressão e não esperamos senti-la</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div> Já temos processos de reporte ESG implementados</label>
+    </div>
+  </div>
+
+  <!-- SECÇÃO C: DOR ACTUAL -->
+  <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
+    <div class="sec-label">Secção C</div>
+    <div class="sec-title">Como Resolve Hoje</div>
+    <div class="sec-line"></div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">2 perguntas</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 6 de 12</div>
+    <div class="q-text">Quando lhe pedem dados de sustentabilidade, como responde habitualmente? <span class="req">*</span></div>
+    <div class="options" id="q6">
+      <label class="opt-label" onclick="selectOpt(this,'q6')"><input type="radio"><div class="opt-indicator"></div> Pedimos ao nosso contabilista</label>
+      <label class="opt-label" onclick="selectOpt(this,'q6')"><input type="radio"><div class="opt-indicator"></div> Recolhemos os dados manualmente (Excel, documentos internos)</label>
+      <label class="opt-label" onclick="selectOpt(this,'q6')"><input type="radio"><div class="opt-indicator"></div> Contratamos uma consultora externa</label>
+      <label class="opt-label" onclick="selectOpt(this,'q6')"><input type="radio"><div class="opt-indicator"></div> Usamos um software específico</label>
+      <label class="opt-label" onclick="selectOpt(this,'q6')"><input type="radio"><div class="opt-indicator"></div> Não conseguimos responder / respondemos de forma incompleta</label>
+      <label class="opt-label" onclick="selectOpt(this,'q6')"><input type="radio"><div class="opt-indicator"></div> Ainda não nos pediram</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 7 de 12</div>
+    <div class="q-text">Qual é a maior dificuldade quando pensa em reportar sustentabilidade? <span class="req">*</span></div>
+    <div class="options" id="q7">
+      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div> Não sei que dados recolher nem como os organizar</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div> Tenho os dados mas não sei como os apresentar no formato certo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div> Não tenho tempo nem recursos internos</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div> O custo de consultoras é demasiado alto</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div> Não percebo o que me é exigido (regulação confusa)</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div> Não vejo dificuldades / não é uma prioridade</label>
+    </div>
+  </div>
+
+  <!-- SECÇÃO D: PROPOSTA DE VALOR -->
+  <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
+    <div class="sec-label">Secção D</div>
+    <div class="sec-title">Proposta de Valor</div>
+    <div class="sec-line"></div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">3 perguntas</div>
+  </div>
+
+  <div class="q-card" style="border-left:3px solid var(--accent);">
+    <div class="q-num">Pergunta 8 de 12</div>
+    <div class="q-text">Imagine uma ferramenta que, a partir do seu SAF-T de contabilidade (o ficheiro que já entrega à AT), gera automaticamente um relatório de sustentabilidade no formato exigido pela UE (VSME). Em 5 minutos, sem formação extra. Qual seria a sua reacção? <span class="req">*</span></div>
+    <div class="options" id="q8">
+      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div> 🙌 Precisava mesmo disto — resolveria um problema real</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div> 👍 Útil, poderia usar no futuro se me fosse exigido</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div> 🤷 Interessante, mas não sinto necessidade imediata</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div> ❌ Não vejo utilidade para a minha empresa</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 9 de 12</div>
+    <div class="q-text">Que funcionalidade seria mais valiosa para si? <span class="req">*</span></div>
+    <div class="q-sub">Escolha a mais importante</div>
+    <div class="options" id="q9">
+      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div> Relatório anual VSME em PDF, pronto a entregar ao banco ou cliente</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div> Dashboard que mostra o que gasto e emito por produto e por processo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div> Recomendações automáticas (IA) sobre como melhorar os indicadores</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div> Passaporte digital ESG por produto para partilhar com clientes</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div> Todas são igualmente importantes</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 10 de 12</div>
+    <div class="q-text">Se esta ferramenta existisse, quanto estaria disposto a pagar por ano? <span class="req">*</span></div>
+    <div class="q-sub">Inclui relatório VSME automático + dashboard básico de indicadores</div>
+    <div class="price-grid" id="q10">
+      <div class="price-card" onclick="selectPrice(this,'q10')">
+        <div class="price">€0</div>
+        <div class="price-desc">Só se for gratuito</div>
+      </div>
+      <div class="price-card" onclick="selectPrice(this,'q10')">
+        <div class="price">€100–250</div>
+        <div class="price-desc">Até ~€20/mês</div>
+      </div>
+      <div class="price-card" onclick="selectPrice(this,'q10')">
+        <div class="price">€250–600</div>
+        <div class="price-desc">Até ~€50/mês</div>
+      </div>
+      <div class="price-card" onclick="selectPrice(this,'q10')">
+        <div class="price">€600–1.500</div>
+        <div class="price-desc">Até ~€125/mês</div>
+      </div>
+      <div class="price-card" onclick="selectPrice(this,'q10')">
+        <div class="price">&gt;€1.500</div>
+        <div class="price-desc">Se resolver bem o problema</div>
+      </div>
+      <div class="price-card" onclick="selectPrice(this,'q10')">
+        <div class="price">Não sei</div>
+        <div class="price-desc">Precisava de saber mais</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECÇÃO E: CANAL -->
+  <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
+    <div class="sec-label">Secção E</div>
+    <div class="sec-title">Canal e Próximos Passos</div>
+    <div class="sec-line"></div>
+    <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">2 perguntas</div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 11 de 12</div>
+    <div class="q-text">Se a sua empresa precisasse de um relatório de sustentabilidade, por onde preferia obter ajuda? <span class="req">*</span></div>
+    <div class="options" id="q11">
+      <label class="opt-label" onclick="selectOpt(this,'q11')"><input type="radio"><div class="opt-indicator"></div> Directamente — contratava um software online por conta própria</label>
+      <label class="opt-label" onclick="selectOpt(this,'q11')"><input type="radio"><div class="opt-indicator"></div> Através do meu contabilista — ele trata de tudo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q11')"><input type="radio"><div class="opt-indicator"></div> Através da associação empresarial da minha área</label>
+      <label class="opt-label" onclick="selectOpt(this,'q11')"><input type="radio"><div class="opt-indicator"></div> O cliente ou retalhista indicaria a plataforma a usar</label>
+      <label class="opt-label" onclick="selectOpt(this,'q11')"><input type="radio"><div class="opt-indicator"></div> Sem preferência</label>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-num">Pergunta 12 de 12</div>
+    <div class="q-text">Há algo que queira acrescentar sobre a pressão ESG que a sua empresa sente ou sobre o que precisaria de uma ferramenta desta área?</div>
+    <textarea id="q12" name="q12_comentario" placeholder="Resposta aberta — opcional. A sua perspectiva é muito útil para nós." rows="4" oninput="updateProgress()"></textarea>
+  </div>
+
+  <div class="consent-box">
+    <strong>Privacidade:</strong> Este questionário é anónimo. Não recolhemos dados pessoais identificáveis. As respostas são usadas exclusivamente para investigação de mercado no âmbito do desenvolvimento do produto VSME AutoReport. Se quiser receber os resultados do estudo ou ser contactado para uma entrevista, pode deixar o seu email em <strong>hello@vsmeautoreport.pt</strong>.
+  </div>
+
+  <!-- Campos hidden preenchidos pelo JS com as respostas -->
+  <input type="hidden" id="hq2" name="q2_dimensao" value="">
+  <input type="hidden" id="hq3" name="q3_pressao_esg" value="">
+  <input type="hidden" id="hq4" name="q4_pressao_escala" value="">
+  <input type="hidden" id="hq5" name="q5_situacao" value="">
+  <input type="hidden" id="hq6" name="q6_como_resolve" value="">
+  <input type="hidden" id="hq7" name="q7_dificuldade" value="">
+  <input type="hidden" id="hq8" name="q8_reacao_produto" value="">
+  <input type="hidden" id="hq9" name="q9_funcionalidade" value="">
+  <input type="hidden" id="hq10" name="q10_preco" value="">
+  <input type="hidden" id="hq11" name="q11_canal" value="">
+  <div class="submit-area">
+    <button class="btn-submit" type="submit" onclick="return collectAndSubmit()">Submeter Questionário</button>
+    <div class="submit-note">Obrigado por participar. Os resultados deste estudo serão partilhados com os participantes que o solicitarem.</div>
+  </div>
+</form>
+
+<div id="thankyou">
+  <div class="ty-icon">✅</div>
+  <div class="ty-title">Obrigado pela sua resposta!</div>
+  <div class="ty-sub">A sua participação ajuda-nos a perceber se estamos a resolver um problema real. Se quiser receber os resultados do estudo ou ser entrevistado (20 minutos, remoto), contacte-nos em <strong>hello@vsmeautoreport.pt</strong>.<br><br>Ficamos gratos pela sua colaboração.</div>
+</div>
+
+<script>
+function selectOpt(el, group, multi) {
+  if (!multi) document.querySelectorAll('#' + group + ' .opt-label').forEach(l => l.classList.remove('selected'));
+  el.classList.toggle('selected');
+  updateProgress();
+}
+function selectScale(el, group) {
+  document.querySelectorAll('#' + group + ' .scale-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  updateProgress();
+}
+function selectPrice(el, group) {
+  document.querySelectorAll('#' + group + ' .price-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  updateProgress();
+}
+function updateProgress() {
+  const answered = [
+    document.getElementById('q1')?.value,
+    document.querySelector('#q2 .selected'),
+    document.querySelector('#q3 .selected'),
+    document.querySelector('#q4 .selected'),
+    document.querySelector('#q5 .selected'),
+    document.querySelector('#q6 .selected'),
+    document.querySelector('#q7 .selected'),
+    document.querySelector('#q8 .selected'),
+    document.querySelector('#q9 .selected'),
+    document.querySelector('#q10 .selected'),
+    document.querySelector('#q11 .selected'),
+    document.getElementById('q12')?.value || true
+  ].filter(Boolean).length;
+  document.getElementById('progressBar').style.width = (answered / 12 * 100) + '%';
+}
+function getSelectedText(groupId) {
+  const selected = document.querySelector('#' + groupId + ' .selected');
+  return selected ? selected.innerText.trim().replace(/^[🙌👍🤷❌]\s*/, '') : '';
+}
+function getSelectedTexts(groupId) {
+  const items = document.querySelectorAll('#' + groupId + ' .selected');
+  return Array.from(items).map(el => el.innerText.trim()).join(' | ');
+}
+function getScaleValue(groupId) {
+  const sel = document.querySelector('#' + groupId + ' .scale-btn.selected');
+  return sel ? sel.innerText.trim() : '';
+}
+function getPriceValue() {
+  const sel = document.querySelector('#q10 .price-card.selected .price');
+  return sel ? sel.innerText.trim() : '';
+}
+
+function collectAndSubmit() {
+  if (!document.getElementById('q1').value ||
+      !document.querySelector('#q2 .selected') ||
+      !document.querySelector('#q5 .selected') ||
+      !document.querySelector('#q8 .selected') ||
+      !document.querySelector('#q10 .selected')) {
+    alert('Por favor responda a todas as perguntas obrigatórias (assinaladas com *) antes de submeter.');
+    return false;
+  }
+  // Preencher campos hidden com respostas JS
+  document.getElementById('hq2').value  = getSelectedText('q2');
+  document.getElementById('hq3').value  = getSelectedTexts('q3');
+  document.getElementById('hq4').value  = getScaleValue('q4');
+  document.getElementById('hq5').value  = getSelectedText('q5');
+  document.getElementById('hq6').value  = getSelectedText('q6');
+  document.getElementById('hq7').value  = getSelectedText('q7');
+  document.getElementById('hq8').value  = getSelectedText('q8');
+  document.getElementById('hq9').value  = getSelectedText('q9');
+  document.getElementById('hq10').value = getPriceValue();
+  document.getElementById('hq11').value = getSelectedText('q11');
+  // Mostrar thank you imediatamente (Formspree faz o redirect depois)
+  document.getElementById('formArea').style.display = 'none';
+  document.getElementById('thankyou').style.display = 'block';
+  document.getElementById('progressBar').style.width = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return true; // deixa o form submeter normalmente
+}
+
+function submitForm() { return collectAndSubmit(); }
+
+// Scroll reveal
+const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.q-card').forEach(c => obs.observe(c));
+</script>
+</body>
+</html>
