@@ -379,10 +379,6 @@
     <textarea id="q12" name="q12_comentario" placeholder="Resposta aberta — opcional. A sua perspectiva é muito útil para nós." rows="4" oninput="updateProgress()"></textarea>
   </div>
 
-  <div class="consent-box">
-    <strong>Privacidade:</strong> Este questionário é anónimo. Não recolhemos dados pessoais identificáveis. As respostas são usadas exclusivamente para investigação de mercado no âmbito do desenvolvimento do produto VSME AutoReport. Se quiser receber os resultados do estudo ou ser contactado para uma entrevista, pode deixar o seu email em <strong>hello@vsmeautoreport.pt</strong>.
-  </div>
-
   <!-- Campos hidden preenchidos pelo JS com as respostas -->
   <input type="hidden" id="hq2" name="q2_dimensao" value="">
   <input type="hidden" id="hq3" name="q3_pressao_esg" value="">
@@ -408,20 +404,32 @@
 
 <script>
 function selectOpt(el, group, multi) {
-  if (!multi) document.querySelectorAll('#' + group + ' .opt-label').forEach(l => l.classList.remove('selected'));
-  el.classList.toggle('selected');
+  // Ignora o "clique fantasma" gerado pelo browser no input invisível
+  if (window.event && window.event.target.tagName === 'INPUT') return;
+
+  if (!multi) {
+    // Opção única (Radios): remove dos outros e adiciona neste
+    document.querySelectorAll('#' + group + ' .opt-label').forEach(l => l.classList.remove('selected'));
+    el.classList.add('selected');
+  } else {
+    // Opção múltipla (Checkboxes da Pergunta 3): liga e desliga
+    el.classList.toggle('selected');
+  }
   updateProgress();
 }
+
 function selectScale(el, group) {
   document.querySelectorAll('#' + group + ' .scale-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   updateProgress();
 }
+
 function selectPrice(el, group) {
   document.querySelectorAll('#' + group + ' .price-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   updateProgress();
 }
+
 function updateProgress() {
   const answered = [
     document.getElementById('q1')?.value,
@@ -439,18 +447,22 @@ function updateProgress() {
   ].filter(Boolean).length;
   document.getElementById('progressBar').style.width = (answered / 12 * 100) + '%';
 }
+
 function getSelectedText(groupId) {
   const selected = document.querySelector('#' + groupId + ' .selected');
-  return selected ? selected.innerText.trim().replace(/^[🙌👍🤷❌]\s*/, '') : '';
+  return selected ? selected.innerText.trim() : '';
 }
+
 function getSelectedTexts(groupId) {
   const items = document.querySelectorAll('#' + groupId + ' .selected');
   return Array.from(items).map(el => el.innerText.trim()).join(' | ');
 }
+
 function getScaleValue(groupId) {
   const sel = document.querySelector('#' + groupId + ' .scale-btn.selected');
   return sel ? sel.innerText.trim() : '';
 }
+
 function getPriceValue() {
   const sel = document.querySelector('#q10 .price-card.selected .price');
   return sel ? sel.innerText.trim() : '';
@@ -465,7 +477,7 @@ function collectAndSubmit() {
     alert('Por favor responda a todas as perguntas obrigatórias (assinaladas com *) antes de submeter.');
     return false;
   }
-  // Preencher campos hidden com respostas JS
+  // Preencher campos hidden
   document.getElementById('hq2').value  = getSelectedText('q2');
   document.getElementById('hq3').value  = getSelectedTexts('q3');
   document.getElementById('hq4').value  = getScaleValue('q4');
@@ -476,17 +488,15 @@ function collectAndSubmit() {
   document.getElementById('hq9').value  = getSelectedText('q9');
   document.getElementById('hq10').value = getPriceValue();
   document.getElementById('hq11').value = getSelectedText('q11');
-  // Mostrar thank you imediatamente (Formspree faz o redirect depois)
+  
+  // Interface de Sucesso
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('thankyou').style.display = 'block';
   document.getElementById('progressBar').style.width = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  return true; // deixa o form submeter normalmente
+  return true; 
 }
 
-function submitForm() { return collectAndSubmit(); }
-
-// Scroll reveal
 const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.q-card').forEach(c => obs.observe(c));
 </script>
