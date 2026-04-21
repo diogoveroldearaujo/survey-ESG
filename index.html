@@ -79,7 +79,7 @@
   .btn-submit:hover { opacity: 0.88; }
   .submit-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
 
-  #thankyou { display: none; text-align: center; padding: 80px 24px; max-width: 520px; margin: 0 auto; }
+  #thankyou { display: none; text-align: center; padding: 60px 24px 32px; max-width: 680px; margin: 0 auto; }
   .ty-icon { font-size: 3rem; margin-bottom: 20px; }
   .ty-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
   .ty-sub { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
@@ -87,11 +87,124 @@
   .consent-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
   .consent-box strong { color: var(--text); }
 
+  /* ══ INFO + RECOMENDAÇÕES (pós-submissão) ══ */
+  #info-block { display: none; max-width: 680px; margin: 0 auto; padding: 0 24px 80px; }
+
+  .info-section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 28px 0 14px;
+    padding-top: 4px;
+    border-top: 2px solid var(--accent-light);
+  }
+
+  .ctx-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 26px 30px;
+    box-shadow: var(--shadow);
+    margin-bottom: 14px;
+  }
+  .ctx-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  .ctx-card-body {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .ctx-card-body strong { color: var(--text); }
+  .ctx-card-body p + p { margin-top: 10px; }
+  .ctx-highlight {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 14px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .tl-table { margin-top: 16px; width: 100%; border-collapse: collapse; }
+  .tl-table tr { border-bottom: 1px solid var(--border); }
+  .tl-table tr:last-child { border-bottom: none; }
+  .tl-table td { padding: 9px 0; vertical-align: top; font-size: 0.845rem; }
+  .tl-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+    padding-right: 20px;
+    min-width: 70px;
+  }
+  .tl-table td:last-child { color: var(--muted); line-height: 1.6; }
+  .tl-table td:last-child strong { color: var(--text); }
+
+  .rec-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .rec-card.amber { border-left-color: #D97706; }
+  .rec-card.blue  { border-left-color: #1D4ED8; }
+  .rec-card.red   { border-left-color: #DC2626; }
+  .rec-card-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .rec-card.amber .rec-card-tag { color: #D97706; }
+  .rec-card.blue  .rec-card-tag { color: #1D4ED8; }
+  .rec-card.red   .rec-card-tag { color: #DC2626; }
+  .rec-card-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+  .rec-card-body  { font-size: 0.845rem; color: var(--muted); line-height: 1.7; }
+  .rec-card-body strong { color: var(--text); }
+
+  .cta-final {
+    background: var(--accent);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  .cta-final p { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.65; margin-bottom: 16px; }
+  .cta-final a {
+    display: inline-block;
+    background: white;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 11px 26px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .cta-final a:hover { opacity: 0.88; }
+
   @media(max-width:600px){
     .q-card { padding: 20px 18px; }
     .price-grid { grid-template-columns: 1fr; }
     .scale-options { gap: 3px; }
     .container { padding: 24px 16px 60px; }
+    #info-block { padding: 0 16px 60px; }
+    .ctx-card, .rec-card { padding: 18px 16px; }
   }
 </style>
 </head>
@@ -123,7 +236,6 @@
     <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">3 perguntas</div>
   </div>
 
-  <!-- Q1 — Sector -->
   <div class="q-card">
     <div class="q-num">Pergunta 1 de 12</div>
     <div class="q-text">Qual é o sector principal da sua empresa? <span class="req">*</span></div>
@@ -144,7 +256,6 @@
     </select>
   </div>
 
-  <!-- Q2 — Dimensão -->
   <div class="q-card">
     <div class="q-num">Pergunta 2 de 12</div>
     <div class="q-text">Quantos trabalhadores tem a empresa? <span class="req">*</span></div>
@@ -156,7 +267,6 @@
     </div>
   </div>
 
-  <!-- Q3 — Relação com grandes empresas / retalhistas [H5] -->
   <div class="q-card">
     <div class="q-num">Pergunta 3 de 12</div>
     <div class="q-text">A sua empresa fornece produtos ou serviços a grandes empresas ou grupos de distribuição nacionais ou internacionais? <span class="req">*</span></div>
@@ -177,7 +287,6 @@
     <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">3 perguntas</div>
   </div>
 
-  <!-- Q4 — Quem já pediu [H5, H1 context] -->
   <div class="q-card">
     <div class="q-num">Pergunta 4 de 12</div>
     <div class="q-text">Já lhe pediram dados ou relatórios sobre sustentabilidade, impacto ambiental ou práticas sociais da empresa? <span class="req">*</span></div>
@@ -192,7 +301,6 @@
     </div>
   </div>
 
-  <!-- Q5 — Consequência da pressão [H1 context, H5] -->
   <div class="q-card">
     <div class="q-num">Pergunta 5 de 12</div>
     <div class="q-text">Já aconteceu a falta de dados de sustentabilidade afectar um negócio, contrato ou financiamento da sua empresa? <span class="req">*</span></div>
@@ -204,7 +312,6 @@
     </div>
   </div>
 
-  <!-- Q6 — Pressão escala [H1 context] -->
   <div class="q-card">
     <div class="q-num">Pergunta 6 de 12</div>
     <div class="q-text">Em que medida prevê que a pressão para reportar sustentabilidade aumente para a sua empresa nos próximos 2 anos? <span class="req">*</span></div>
@@ -228,7 +335,6 @@
     <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">2 perguntas</div>
   </div>
 
-  <!-- Q7 — Como resolve [H4 context] -->
   <div class="q-card">
     <div class="q-num">Pergunta 7 de 12</div>
     <div class="q-text">Quando lhe pedem dados de sustentabilidade, como responde habitualmente? <span class="req">*</span></div>
@@ -241,7 +347,6 @@
     </div>
   </div>
 
-  <!-- Q8 — Maior dificuldade [pain mapping] -->
   <div class="q-card">
     <div class="q-num">Pergunta 8 de 12</div>
     <div class="q-text">Qual é a maior dificuldade quando pensa em reportar sustentabilidade? <span class="req">*</span></div>
@@ -258,15 +363,14 @@
   <!-- SECÇÃO D -->
   <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
     <div class="sec-label">Secção D</div>
-    <div class="sec-title">Ferramenta de Reporte ESG </div>
+    <div class="sec-title">Ferramenta de Reporte ESG</div>
     <div class="sec-line"></div>
     <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">2 perguntas</div>
   </div>
 
-  <!-- Q9 — BLIND value prop [H1] — sem mencionar SAF-T -->
   <div class="q-card" style="border-left:3px solid var(--accent);">
     <div class="q-num">Pergunta 9 de 12</div>
-    <div class="q-text">Imagine uma ferramenta que, utiliza informação que a sua empresa já possui internamente, gera automaticamente um relatório de sustentabilidade pronto a entregar a clientes, bancos ou entidades públicas — sem recolher dados novos, sem formação técnica, em menos de 5 minutos. Qual seria a sua reacção? <span class="req">*</span></div>
+    <div class="q-text">Imagine uma ferramenta que utiliza informação que a sua empresa já possui internamente, gera automaticamente um relatório de sustentabilidade pronto a entregar a clientes, bancos ou entidades públicas — sem recolher dados novos, sem formação técnica, em menos de 5 minutos. Qual seria a sua reacção? <span class="req">*</span></div>
     <div class="options" id="q9">
       <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div>🙌 Precisava mesmo disto — resolveria um problema real e imediato</label>
       <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div>👍 Seria útil — usaria se me fosse exigido pelos clientes ou pelo banco</label>
@@ -275,15 +379,14 @@
     </div>
   </div>
 
-  <!-- Q10 — Feature priority [H6] -->
   <div class="q-card">
     <div class="q-num">Pergunta 10 de 12</div>
     <div class="q-text">Que funcionalidade seria mais valiosa para si? <span class="req">*</span></div>
     <div class="q-sub">Escolha apenas a mais importante</div>
     <div class="options" id="q10">
       <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Relatório anual de sustentabilidade em PDF ou no formato de partilha exigido pela UE, pronto a entregar ao banco ou cliente</label>
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Dashboard que apresetna o que a empresa gasta e emite por produto e por processo</label>
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Recomendações automáticas sobre como reduzir custos e melhorar indicadores de sustentabildiade</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Dashboard que apresenta o que a empresa gasta e emite por produto e por processo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Recomendações automáticas sobre como reduzir custos e melhorar indicadores de sustentabilidade</label>
       <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Ficha de sustentabilidade por produto para partilhar com clientes ou colocar na embalagem</label>
       <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Todas são igualmente importantes</label>
     </div>
@@ -297,39 +400,19 @@
     <div style="font-size:0.82rem;color:var(--muted);margin-top:4px;">2 perguntas</div>
   </div>
 
-  <!-- Q11 — Preço [H1] -->
   <div class="q-card">
     <div class="q-num">Pergunta 11 de 12</div>
     <div class="q-text">Se esta ferramenta existisse e resolvesse o problema, quanto estaria disposto a pagar por ano? <span class="req">*</span></div>
     <div class="price-grid" id="q11">
-      <div class="price-card" onclick="selectPrice(this,'q11')">
-        <div class="price">€0</div>
-        <div class="price-desc">Só se for gratuito</div>
-      </div>
-      <div class="price-card" onclick="selectPrice(this,'q11')">
-        <div class="price">€100–250</div>
-        <div class="price-desc">Até ~€20/mês</div>
-      </div>
-      <div class="price-card" onclick="selectPrice(this,'q11')">
-        <div class="price">€250–600</div>
-        <div class="price-desc">Até ~€50/mês</div>
-      </div>
-      <div class="price-card" onclick="selectPrice(this,'q11')">
-        <div class="price">€600–1.500</div>
-        <div class="price-desc">Até ~€125/mês</div>
-      </div>
-      <div class="price-card" onclick="selectPrice(this,'q11')">
-        <div class="price">&gt;€1.500</div>
-        <div class="price-desc">Se resolver bem</div>
-      </div>
-      <div class="price-card" onclick="selectPrice(this,'q11')">
-        <div class="price">Não sei</div>
-        <div class="price-desc">Precisava de saber mais</div>
-      </div>
+      <div class="price-card" onclick="selectPrice(this,'q11')"><div class="price">€0</div><div class="price-desc">Só se for gratuito</div></div>
+      <div class="price-card" onclick="selectPrice(this,'q11')"><div class="price">€100–250</div><div class="price-desc">Até ~€20/mês</div></div>
+      <div class="price-card" onclick="selectPrice(this,'q11')"><div class="price">€250–600</div><div class="price-desc">Até ~€50/mês</div></div>
+      <div class="price-card" onclick="selectPrice(this,'q11')"><div class="price">€600–1.500</div><div class="price-desc">Até ~€125/mês</div></div>
+      <div class="price-card" onclick="selectPrice(this,'q11')"><div class="price">&gt;€1.500</div><div class="price-desc">Se resolver bem</div></div>
+      <div class="price-card" onclick="selectPrice(this,'q11')"><div class="price">Não sei</div><div class="price-desc">Precisava de saber mais</div></div>
     </div>
   </div>
 
-  <!-- Q12 — Canal [H4, H5] -->
   <div class="q-card">
     <div class="q-num">Pergunta 12 de 12</div>
     <div class="q-text">Se a sua empresa precisasse de um relatório de sustentabilidade, por onde preferia obter ajuda? <span class="req">*</span></div>
@@ -342,7 +425,6 @@
     </div>
   </div>
 
-  <!-- Hidden fields -->
   <input type="hidden" id="hq2"  name="q2_dimensao"       value="">
   <input type="hidden" id="hq3"  name="q3_fornecedor"     value="">
   <input type="hidden" id="hq4"  name="q4_quem_pediu"     value="">
@@ -361,7 +443,7 @@
 
   <div class="submit-area">
     <button class="btn-submit" type="submit" onclick="return collectAndSubmit()">Submeter Questionário</button>
-    <div class="submit-note">Obrigado por participar.
+    <div class="submit-note">Obrigado por participar. Após submeter, encontrará informação sobre o contexto regulatório e recomendações práticas.</div>
   </div>
 </form>
 
@@ -371,16 +453,16 @@
   <div class="ty-title">Obrigado pela sua resposta!</div>
   <div class="ty-sub">A sua participação ajuda-nos a perceber se estamos a resolver um problema real para as PMEs portuguesas.<br><br>Caso pretenda obter mais informações, contacte-nos em <strong>diogoveroldearaujo@gmail.com</strong></div>
 </div>
- 
+
 <!-- ══════════════════════════════════════════════════════
   BLOCO INFORMATIVO — aparece após submissão
   Contexto CSRD/VSME + recomendações práticas
 ═══════════════════════════════════════════════════════ -->
 <div id="info-block">
- 
+
   <!-- O QUE É O VSME -->
   <div class="info-section-title">O que é o VSME e porque é que importa à sua empresa</div>
- 
+
   <div class="ctx-card">
     <div class="ctx-card-title">O standard de sustentabilidade criado especificamente para PMEs</div>
     <div class="ctx-card-body">
@@ -392,7 +474,7 @@
       <p>E a boa notícia: para PMEs não cotadas, o VSME é <strong>auto-declaração</strong> — a empresa declara os dados com base nos seus próprios registos. Não precisa de auditor externo para validar.</p>
     </div>
   </div>
- 
+
   <!-- CSRD E O EFEITO CASCATA -->
   <div class="ctx-card">
     <div class="ctx-card-title">As grandes empresas já são obrigadas a reportar. A pressão vai chegar às PMEs.</div>
@@ -403,7 +485,7 @@
         O padrão histórico é claro: quando um grande retalhista introduz um novo requisito para fornecedores — seja qualidade, segurança alimentar ou práticas laborais — quem não está preparado perde o contrato. O ESG vai seguir o mesmo caminho.
       </div>
       <p>Os bancos estão a fazer o mesmo. Produtos de crédito "verde" com condições preferenciais já existem no BPI, Caixa e Santander — e ligam a taxa de juro ao desempenho de sustentabilidade da empresa. <strong>Ter um relatório VSME pode valer, literalmente, pontos percentuais na taxa de juro.</strong></p>
- 
+
       <table class="tl-table">
         <tr>
           <td>Jan 2024</td>
@@ -428,10 +510,10 @@
       </table>
     </div>
   </div>
- 
+
   <!-- RECOMENDAÇÕES -->
   <div class="info-section-title">3 coisas que pode fazer já, sem custo</div>
- 
+
   <div class="rec-card">
     <div class="rec-card-tag">Acção imediata · Sem custo · 1 telefonema</div>
     <div class="rec-card-title">Peça ao operador de resíduos o relatório anual com tonelagens</div>
@@ -439,7 +521,7 @@
       O operador de resíduos (EGF, Valorsul, Amarsul, RESINORTE, etc.) é legalmente obrigado a emitir <strong>Guias de Acompanhamento de Resíduos (GAR)</strong> com o peso total por tipo de resíduo — perigoso e não perigoso. Um telefonema ou email é suficiente. Este documento cobre o indicador VSME de resíduos (B7) que os retalhistas mais valorizam, e que de outra forma seria difícil de quantificar.
     </div>
   </div>
- 
+
   <div class="rec-card amber">
     <div class="rec-card-tag">Acção imediata · 5 minutos · Fale com o contabilista</div>
     <div class="rec-card-title">Separe as sub-contas de energia no plano contabilístico</div>
@@ -447,7 +529,7 @@
       Peça ao seu contabilista para criar sub-contas separadas para <strong>electricidade (6241)</strong>, <strong>combustíveis (6242)</strong> e <strong>água (6243)</strong> no próximo exercício. Com esta separação simples, qualquer ferramenta consegue calcular automaticamente o consumo em kWh, litros e m³ — e gerar os indicadores VSME de energia e emissões sem precisar de recolher dados adicionais. Sem esta separação, o cálculo é uma estimativa; com ela, é um dado exacto.
     </div>
   </div>
- 
+
   <div class="rec-card blue">
     <div class="rec-card-tag">Informação importante · Desmistificar</div>
     <div class="rec-card-title">O VSME Básico é mais simples do que parece — vários indicadores são uma linha</div>
@@ -455,7 +537,7 @@
       Para a maioria das PMEs portuguesas, vários dos 11 indicadores do VSME Básico são triviais. O indicador <strong>B11 (Anti-Corrupção)</strong>: <em>"0 condenações por corrupção, €0 em coimas."</em> — uma linha. O indicador <strong>B10a (Salários acima do mínimo)</strong>: <em>"Sim, todos os trabalhadores recebem acima do SMN."</em> — uma linha. O que demora tempo é recolher os dados de energia, água e pessoal — mas esses já existem na contabilidade e nas facturas da empresa. <strong>O problema não é a complexidade do standard, é a dispersão dos dados.</strong>
     </div>
   </div>
- 
+
   <div class="rec-card red">
     <div class="rec-card-tag">Atenção · Se é fornecedor de grandes empresas</div>
     <div class="rec-card-title">Antecipe-se antes de receber o email a pedir o relatório</div>
@@ -463,15 +545,15 @@
       Se a sua empresa fornece para cadeias de retalho ou grandes grupos industriais, a probabilidade de receber um pedido de dados ESG nos próximos 1-2 anos é alta. Grupos como a <strong>Sonae, Jerónimo Martins, Auchan, Continente</strong> e outros estão obrigados ao CSRD e precisam de dados dos seus fornecedores para o próprio relatório. Preparar-se agora — com os dados de energia, pessoal e resíduos organizados — é muito mais fácil do que responder a um pedido urgente com prazo de 2 semanas.
     </div>
   </div>
- 
+
   <!-- CTA FINAL -->
   <div class="cta-final">
     <p>Estamos a desenvolver uma ferramenta que transforma os dados contabilísticos que a sua empresa já tem num relatório VSME automático — sem formação técnica, em minutos. Se quiser saber mais ou ser avisado quando lançarmos:</p>
     <a href="mailto:diogoveroldearaujo@gmail.com">diogoveroldearaujo@gmail.com</a>
   </div>
- 
+
 </div><!-- /info-block -->
- 
+
 <script>
 function selectOpt(el, group, multi) {
   if (!multi) {
@@ -546,7 +628,7 @@ function collectAndSubmit() {
   document.getElementById('hq10').value = getSelectedText('q10');
   document.getElementById('hq11').value = getPriceValue('q11');
   document.getElementById('hq12').value = getSelectedText('q12');
- 
+
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('thankyou').style.display = 'block';
   document.getElementById('info-block').style.display = 'block';
