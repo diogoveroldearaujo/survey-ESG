@@ -365,14 +365,14 @@
   </div>
 </form>
 
+<!-- ── OBRIGADO ── -->
 <div id="thankyou">
   <div class="ty-icon">✅</div>
   <div class="ty-title">Obrigado pela sua resposta!</div>
-  <div class="ty-sub">A sua participação ajuda-nos a perceber se estamos a resolver um problema real para as PMEs portuguesas.<br><br>
-    Caso pretenda obter mais informações por favor contacte-nos em <strong>diogoveroldearaujo@gmail.com</strong>.</div>
+  <div class="ty-sub">A sua participação ajuda-nos a perceber se estamos a resolver um problema real para as PMEs portuguesas.<br><br>Caso pretenda obter mais informações, contacte-nos em <strong>diogoveroldearaujo@gmail.com</strong></div>
 </div>
-
-  <!-- ══════════════════════════════════════════════════════
+ 
+<!-- ══════════════════════════════════════════════════════
   BLOCO INFORMATIVO — aparece após submissão
   Contexto CSRD/VSME + recomendações práticas
 ═══════════════════════════════════════════════════════ -->
@@ -471,7 +471,7 @@
   </div>
  
 </div><!-- /info-block -->
-
+ 
 <script>
 function selectOpt(el, group, multi) {
   if (!multi) {
@@ -546,9 +546,10 @@ function collectAndSubmit() {
   document.getElementById('hq10').value = getSelectedText('q10');
   document.getElementById('hq11').value = getPriceValue('q11');
   document.getElementById('hq12').value = getSelectedText('q12');
-
+ 
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('thankyou').style.display = 'block';
+  document.getElementById('info-block').style.display = 'block';
   document.getElementById('progressBar').style.width = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
   return true;
