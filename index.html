@@ -260,10 +260,10 @@
     <div class="q-num">Pergunta 2 de 12</div>
     <div class="q-text">Quantos trabalhadores tem a empresa? <span class="req">*</span></div>
     <div class="options" id="q2">
-      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div>Menos de 10</label>
-      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div>10 a 49</label>
-      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div>50 a 249</label>
-      <label class="opt-label" onclick="selectOpt(this,'q2')"><input type="radio"><div class="opt-indicator"></div>250 ou mais</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2',false,event)"><input type="radio"><div class="opt-indicator"></div>Menos de 10</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2',false,event)"><input type="radio"><div class="opt-indicator"></div>10 a 49</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2',false,event)"><input type="radio"><div class="opt-indicator"></div>50 a 249</label>
+      <label class="opt-label" onclick="selectOpt(this,'q2',false,event)"><input type="radio"><div class="opt-indicator"></div>250 ou mais</label>
     </div>
   </div>
 
@@ -272,10 +272,10 @@
     <div class="q-text">A sua empresa fornece produtos ou serviços a grandes empresas ou grupos de distribuição nacionais ou internacionais? <span class="req">*</span></div>
     <div class="q-sub">Por exemplo: cadeias de retalho, grupos industriais, hotelaria de cadeia, concessionários, grandes construtoras, etc.</div>
     <div class="options" id="q3">
-      <label class="opt-label" onclick="selectOpt(this,'q3')"><input type="radio"><div class="opt-indicator"></div>Sim, somos fornecedores directos de grandes empresas ou grupos</label>
-      <label class="opt-label" onclick="selectOpt(this,'q3')"><input type="radio"><div class="opt-indicator"></div>Sim, somos subcontratados ou fornecedores indirectos</label>
-      <label class="opt-label" onclick="selectOpt(this,'q3')"><input type="radio"><div class="opt-indicator"></div>Não — vendemos principalmente a outras PMEs ou a consumidores finais</label>
-      <label class="opt-label" onclick="selectOpt(this,'q3')"><input type="radio"><div class="opt-indicator"></div>Não se aplica ao nosso modelo de negócio</label>
+      <label class="opt-label" onclick="selectOpt(this,'q3',false,event)"><input type="radio"><div class="opt-indicator"></div>Sim, somos fornecedores directos de grandes empresas ou grupos</label>
+      <label class="opt-label" onclick="selectOpt(this,'q3',false,event)"><input type="radio"><div class="opt-indicator"></div>Sim, somos subcontratados ou fornecedores indirectos</label>
+      <label class="opt-label" onclick="selectOpt(this,'q3',false,event)"><input type="radio"><div class="opt-indicator"></div>Não — vendemos principalmente a outras PMEs ou a consumidores finais</label>
+      <label class="opt-label" onclick="selectOpt(this,'q3',false,event)"><input type="radio"><div class="opt-indicator"></div>Não se aplica ao nosso modelo de negócio</label>
     </div>
   </div>
 
@@ -292,12 +292,12 @@
     <div class="q-text">Já lhe pediram dados ou relatórios sobre sustentabilidade, impacto ambiental ou práticas sociais da empresa? <span class="req">*</span></div>
     <div class="q-sub">Seleccione todas as que se aplicam</div>
     <div class="options" id="q4">
-      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true)"><input type="checkbox"><div class="opt-indicator"></div>Sim, por um cliente nacional (empresa grande, grupo de distribuição)</label>
-      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true)"><input type="checkbox"><div class="opt-indicator"></div>Sim, por um cliente internacional</label>
-      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true)"><input type="checkbox"><div class="opt-indicator"></div>Sim, pelo banco ou instituição financeira</label>
-      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true)"><input type="checkbox"><div class="opt-indicator"></div>Sim, por uma entidade pública (concurso, subsídio, certificação)</label>
-      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true)"><input type="checkbox"><div class="opt-indicator"></div>Não, ainda ninguém pediu</label>
-      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true)"><input type="checkbox"><div class="opt-indicator"></div>Não sei / não tenho a certeza</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true,event)"><input type="checkbox"><div class="opt-indicator"></div>Sim, por um cliente nacional (empresa grande, grupo de distribuição)</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true,event)"><input type="checkbox"><div class="opt-indicator"></div>Sim, por um cliente internacional</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true,event)"><input type="checkbox"><div class="opt-indicator"></div>Sim, pelo banco ou instituição financeira</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true,event)"><input type="checkbox"><div class="opt-indicator"></div>Sim, por uma entidade pública (concurso, subsídio, certificação)</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true,event)"><input type="checkbox"><div class="opt-indicator"></div>Não, ainda ninguém pediu</label>
+      <label class="opt-label checkbox" onclick="selectOpt(this,'q4',true,event)"><input type="checkbox"><div class="opt-indicator"></div>Não sei / não tenho a certeza</label>
     </div>
   </div>
 
@@ -305,10 +305,10 @@
     <div class="q-num">Pergunta 5 de 12</div>
     <div class="q-text">Já aconteceu a falta de dados de sustentabilidade afectar um negócio, contrato ou financiamento da sua empresa? <span class="req">*</span></div>
     <div class="options" id="q5">
-      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div>Sim — perdemos ou estivemos em risco de perder um contrato ou financiamento</label>
-      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div>Ainda não aconteceu, mas sentimos que pode vir a acontecer</label>
-      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div>Não sentimos essa pressão e não esperamos senti-la</label>
-      <label class="opt-label" onclick="selectOpt(this,'q5')"><input type="radio"><div class="opt-indicator"></div>Já temos processos de reporte ESG implementados</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5',false,event)"><input type="radio"><div class="opt-indicator"></div>Sim — perdemos ou estivemos em risco de perder um contrato ou financiamento</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5',false,event)"><input type="radio"><div class="opt-indicator"></div>Ainda não aconteceu, mas sentimos que pode vir a acontecer</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5',false,event)"><input type="radio"><div class="opt-indicator"></div>Não sentimos essa pressão e não esperamos senti-la</label>
+      <label class="opt-label" onclick="selectOpt(this,'q5',false,event)"><input type="radio"><div class="opt-indicator"></div>Já temos processos de reporte ESG implementados</label>
     </div>
   </div>
 
@@ -339,11 +339,11 @@
     <div class="q-num">Pergunta 7 de 12</div>
     <div class="q-text">Quando lhe pedem dados de sustentabilidade, como responde habitualmente? <span class="req">*</span></div>
     <div class="options" id="q7">
-      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div>Pedimos ao nosso contabilista ou consultor externo</label>
-      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div>Recolhemos os dados manualmente (Excel, documentos internos)</label>
-      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div>Usamos um software específico de sustentabilidade</label>
-      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div>Não conseguimos responder adequadamente</label>
-      <label class="opt-label" onclick="selectOpt(this,'q7')"><input type="radio"><div class="opt-indicator"></div>Ainda não nos pediram</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7',false,event)"><input type="radio"><div class="opt-indicator"></div>Pedimos ao nosso contabilista ou consultor externo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7',false,event)"><input type="radio"><div class="opt-indicator"></div>Recolhemos os dados manualmente (Excel, documentos internos)</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7',false,event)"><input type="radio"><div class="opt-indicator"></div>Usamos um software específico de sustentabilidade</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7',false,event)"><input type="radio"><div class="opt-indicator"></div>Não conseguimos responder adequadamente</label>
+      <label class="opt-label" onclick="selectOpt(this,'q7',false,event)"><input type="radio"><div class="opt-indicator"></div>Ainda não nos pediram</label>
     </div>
   </div>
 
@@ -351,12 +351,12 @@
     <div class="q-num">Pergunta 8 de 12</div>
     <div class="q-text">Qual é a maior dificuldade quando pensa em reportar sustentabilidade? <span class="req">*</span></div>
     <div class="options" id="q8">
-      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div>Não sei que dados recolher nem como os organizar</label>
-      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div>Tenho os dados mas não sei como os apresentar no formato certo</label>
-      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div>Não tenho tempo nem recursos internos para tratar disto</label>
-      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div>O custo de consultoras externas é demasiado alto</label>
-      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div>Não percebo o que me é exigido — a regulação é confusa</label>
-      <label class="opt-label" onclick="selectOpt(this,'q8')"><input type="radio"><div class="opt-indicator"></div>Não vejo dificuldades / não é uma prioridade agora</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8',false,event)"><input type="radio"><div class="opt-indicator"></div>Não sei que dados recolher nem como os organizar</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8',false,event)"><input type="radio"><div class="opt-indicator"></div>Tenho os dados mas não sei como os apresentar no formato certo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8',false,event)"><input type="radio"><div class="opt-indicator"></div>Não tenho tempo nem recursos internos para tratar disto</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8',false,event)"><input type="radio"><div class="opt-indicator"></div>O custo de consultoras externas é demasiado alto</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8',false,event)"><input type="radio"><div class="opt-indicator"></div>Não percebo o que me é exigido — a regulação é confusa</label>
+      <label class="opt-label" onclick="selectOpt(this,'q8',false,event)"><input type="radio"><div class="opt-indicator"></div>Não vejo dificuldades / não é uma prioridade agora</label>
     </div>
   </div>
 
@@ -372,10 +372,10 @@
     <div class="q-num">Pergunta 9 de 12</div>
     <div class="q-text">Imagine uma ferramenta que utiliza informação que a sua empresa já possui internamente, gera automaticamente um relatório de sustentabilidade pronto a entregar a clientes, bancos ou entidades públicas — sem recolher dados novos, sem formação técnica, em menos de 5 minutos. Qual seria a sua reacção? <span class="req">*</span></div>
     <div class="options" id="q9">
-      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div>🙌 Precisava mesmo disto — resolveria um problema real e imediato</label>
-      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div>👍 Seria útil — usaria se me fosse exigido pelos clientes ou pelo banco</label>
-      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div>🤷 Interessante, mas não sinto necessidade imediata</label>
-      <label class="opt-label" onclick="selectOpt(this,'q9')"><input type="radio"><div class="opt-indicator"></div>❌ Não vejo utilidade para a minha empresa</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9',false,event)"><input type="radio"><div class="opt-indicator"></div>🙌 Precisava mesmo disto — resolveria um problema real e imediato</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9',false,event)"><input type="radio"><div class="opt-indicator"></div>👍 Seria útil — usaria se me fosse exigido pelos clientes ou pelo banco</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9',false,event)"><input type="radio"><div class="opt-indicator"></div>🤷 Interessante, mas não sinto necessidade imediata</label>
+      <label class="opt-label" onclick="selectOpt(this,'q9',false,event)"><input type="radio"><div class="opt-indicator"></div>❌ Não vejo utilidade para a minha empresa</label>
     </div>
   </div>
 
@@ -384,11 +384,11 @@
     <div class="q-text">Que funcionalidade seria mais valiosa para si? <span class="req">*</span></div>
     <div class="q-sub">Escolha apenas a mais importante</div>
     <div class="options" id="q10">
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Relatório anual de sustentabilidade em PDF ou no formato de partilha exigido pela UE, pronto a entregar ao banco ou cliente</label>
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Dashboard que apresenta o que a empresa gasta e emite por produto e por processo</label>
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Recomendações automáticas sobre como reduzir custos e melhorar indicadores de sustentabilidade</label>
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Ficha de sustentabilidade por produto para partilhar com clientes ou colocar na embalagem</label>
-      <label class="opt-label" onclick="selectOpt(this,'q10')"><input type="radio"><div class="opt-indicator"></div>Todas são igualmente importantes</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10',false,event)"><input type="radio"><div class="opt-indicator"></div>Relatório anual de sustentabilidade em PDF ou no formato de partilha exigido pela UE, pronto a entregar ao banco ou cliente</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10',false,event)"><input type="radio"><div class="opt-indicator"></div>Dashboard que apresenta o que a empresa gasta e emite por produto e por processo</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10',false,event)"><input type="radio"><div class="opt-indicator"></div>Recomendações automáticas sobre como reduzir custos e melhorar indicadores de sustentabilidade</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10',false,event)"><input type="radio"><div class="opt-indicator"></div>Ficha de sustentabilidade por produto para partilhar com clientes ou colocar na embalagem</label>
+      <label class="opt-label" onclick="selectOpt(this,'q10',false,event)"><input type="radio"><div class="opt-indicator"></div>Todas são igualmente importantes</label>
     </div>
   </div>
 
@@ -417,11 +417,11 @@
     <div class="q-num">Pergunta 12 de 12</div>
     <div class="q-text">Se a sua empresa precisasse de um relatório de sustentabilidade, por onde preferia obter ajuda? <span class="req">*</span></div>
     <div class="options" id="q12">
-      <label class="opt-label" onclick="selectOpt(this,'q12')"><input type="radio"><div class="opt-indicator"></div>Directamente — contratava um software online por conta própria</label>
-      <label class="opt-label" onclick="selectOpt(this,'q12')"><input type="radio"><div class="opt-indicator"></div>Através do meu contabilista — preferia que ele tratasse disto</label>
-      <label class="opt-label" onclick="selectOpt(this,'q12')"><input type="radio"><div class="opt-indicator"></div>Através da associação empresarial do meu sector</label>
-      <label class="opt-label" onclick="selectOpt(this,'q12')"><input type="radio"><div class="opt-indicator"></div>O cliente ou parceiro comercial indicaria a plataforma — seguia a recomendação deles</label>
-      <label class="opt-label" onclick="selectOpt(this,'q12')"><input type="radio"><div class="opt-indicator"></div>Sem preferência</label>
+      <label class="opt-label" onclick="selectOpt(this,'q12',false,event)"><input type="radio"><div class="opt-indicator"></div>Directamente — contratava um software online por conta própria</label>
+      <label class="opt-label" onclick="selectOpt(this,'q12',false,event)"><input type="radio"><div class="opt-indicator"></div>Através do meu contabilista — preferia que ele tratasse disto</label>
+      <label class="opt-label" onclick="selectOpt(this,'q12',false,event)"><input type="radio"><div class="opt-indicator"></div>Através da associação empresarial do meu sector</label>
+      <label class="opt-label" onclick="selectOpt(this,'q12',false,event)"><input type="radio"><div class="opt-indicator"></div>O cliente ou parceiro comercial indicaria a plataforma — seguia a recomendação deles</label>
+      <label class="opt-label" onclick="selectOpt(this,'q12',false,event)"><input type="radio"><div class="opt-indicator"></div>Sem preferência</label>
     </div>
   </div>
 
@@ -555,7 +555,9 @@
 </div><!-- /info-block -->
 
 <script>
-function selectOpt(el, group, multi) {
+// ── FIX 1: event.preventDefault() stops browser double-toggling checkboxes ──
+function selectOpt(el, group, multi, event) {
+  if (event) event.preventDefault();
   if (!multi) {
     document.querySelectorAll('#' + group + ' .opt-label').forEach(l => l.classList.remove('selected'));
     el.classList.add('selected');
@@ -606,6 +608,8 @@ function getPriceValue(id) {
   const s = document.querySelector('#' + id + ' .price-card.selected .price');
   return s ? s.innerText.trim() : '';
 }
+
+// ── FIX 2: submit via fetch so Formspree never redirects the page ──────────
 function collectAndSubmit() {
   if (!document.getElementById('q1').value ||
       !document.querySelector('#q2 .selected') ||
@@ -617,6 +621,8 @@ function collectAndSubmit() {
     alert('Por favor responda a todas as perguntas obrigatórias (assinaladas com *) antes de submeter.');
     return false;
   }
+
+  // Populate hidden fields
   document.getElementById('hq2').value  = getSelectedText('q2');
   document.getElementById('hq3').value  = getSelectedText('q3');
   document.getElementById('hq4').value  = getSelectedTexts('q4');
@@ -629,13 +635,27 @@ function collectAndSubmit() {
   document.getElementById('hq11').value = getPriceValue('q11');
   document.getElementById('hq12').value = getSelectedText('q12');
 
+  // Show thank you + recommendations immediately (before fetch completes)
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('thankyou').style.display = 'block';
   document.getElementById('info-block').style.display = 'block';
   document.getElementById('progressBar').style.width = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  return true;
+
+  // Submit to Formspree in background via fetch — no page redirect
+  const form = document.getElementById('formArea');
+  const data = new FormData(form);
+  fetch(form.action, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).catch(function(err) {
+    console.warn('Formspree submission error:', err);
+  });
+
+  return false; // prevent native form submission (and Formspree redirect)
 }
+
 const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.q-card').forEach(c => obs.observe(c));
 </script>
