@@ -425,6 +425,14 @@
     </div>
   </div>
 
+  <!-- Q13 — Comentários (campo livre) -->
+  <div class="q-card">
+    <div class="q-num">Comentários adicionais (opcional)</div>
+    <div class="q-text">Há algo que queira acrescentar sobre a pressão ESG que a sua empresa sente, ou sobre o que precisaria de uma ferramenta nesta área?</div>
+    <div class="q-sub">Campo livre — a sua perspectiva é muito útil para nós.</div>
+    <textarea id="q13" name="q13_comentarios" rows="4" placeholder="Escreva aqui os seus comentários..."></textarea>
+  </div>
+
   <input type="hidden" id="hq2"  name="q2_dimensao"       value="">
   <input type="hidden" id="hq3"  name="q3_fornecedor"     value="">
   <input type="hidden" id="hq4"  name="q4_quem_pediu"     value="">
@@ -461,7 +469,7 @@
 <div id="info-block">
 
   <!-- O QUE É O VSME -->
-  <div class="info-section-title">O que é o Voluntary Sustainability Reporting Framework (VSME) e porque é que importa à sua empresa</div>
+  <div class="info-section-title">O que é o VSME e porque é que importa à sua empresa</div>
 
   <div class="ctx-card">
     <div class="ctx-card-title">O standard de sustentabilidade criado especificamente para PMEs</div>
@@ -496,6 +504,10 @@
           <td><strong>CSRD obrigatório</strong> para empresas com +500 trabalhadores — começam a pedir dados ESG aos fornecedores PME</td>
         </tr>
         <tr>
+          <td>2026</td>
+          <td><strong>SAF-T anual obrigatório</strong> para todas as PMEs em Portugal — o ficheiro contabilístico que entregam à AT passa a incluir o plano de contas completo, base para o relatório VSME automático</td>
+        </tr>
+        <tr>
           <td>2026–27</td>
           <td><strong>Bancos e retalhistas</strong> tornam ESG requisito de contrato e de acesso a crédito preferencial</td>
         </tr>
@@ -518,6 +530,14 @@
     </div>
   </div>
 
+  <div class="rec-card amber">
+    <div class="rec-card-tag">Acção imediata · 5 minutos · Fale com o contabilista</div>
+    <div class="rec-card-title">Separe as sub-contas de energia no plano contabilístico</div>
+    <div class="rec-card-body">
+      Peça ao seu contabilista para criar sub-contas separadas para <strong>electricidade (6241)</strong>, <strong>combustíveis (6242)</strong> e <strong>água (6243)</strong> no próximo exercício. Com esta separação simples, qualquer ferramenta consegue calcular automaticamente o consumo em kWh, litros e m³ — e gerar os indicadores VSME de energia e emissões sem precisar de recolher dados adicionais. Sem esta separação, o cálculo é uma estimativa; com ela, é um dado exacto.
+    </div>
+  </div>
+
   <div class="rec-card blue">
     <div class="rec-card-tag">Informação importante · Desmistificar</div>
     <div class="rec-card-title">O VSME Básico é mais simples do que parece — vários indicadores são uma linha</div>
@@ -536,6 +556,7 @@
 
   <!-- CTA FINAL -->
   <div class="cta-final">
+    <p>Estamos a desenvolver uma ferramenta que transforma os dados contabilísticos que a sua empresa já tem num relatório VSME automático — sem formação técnica, em minutos. Se quiser saber mais ou ser avisado quando lançarmos:</p>
     <a href="mailto:diogoveroldearaujo@gmail.com">diogoveroldearaujo@gmail.com</a>
   </div>
 
@@ -596,7 +617,7 @@ function getPriceValue(id) {
   return s ? s.innerText.trim() : '';
 }
 
-// ── FIX 2: submit via fetch so Formspree never redirects the page ──────────
+// ── Submit: collect data FIRST, then hide form, then send ──────────────────
 function collectAndSubmit() {
   if (!document.getElementById('q1').value ||
       !document.querySelector('#q2 .selected') ||
@@ -609,38 +630,47 @@ function collectAndSubmit() {
     return false;
   }
 
-  // Populate hidden fields
-  document.getElementById('hq2').value  = getSelectedText('q2');
-  document.getElementById('hq3').value  = getSelectedText('q3');
-  document.getElementById('hq4').value  = getSelectedTexts('q4');
-  document.getElementById('hq5').value  = getSelectedText('q5');
-  document.getElementById('hq6').value  = getScaleValue('q6');
-  document.getElementById('hq7').value  = getSelectedText('q7');
-  document.getElementById('hq8').value  = getSelectedText('q8');
-  document.getElementById('hq9').value  = getSelectedText('q9');
-  document.getElementById('hq10').value = getSelectedText('q10');
-  document.getElementById('hq11').value = getPriceValue('q11');
-  document.getElementById('hq12').value = getSelectedText('q12');
+  // 1. Collect ALL data into a plain object BEFORE touching the DOM
+  const payload = {
+    q1_sector:        document.getElementById('q1').value,
+    q2_dimensao:      getSelectedText('q2'),
+    q3_fornecedor:    getSelectedText('q3'),
+    q4_quem_pediu:    getSelectedTexts('q4'),
+    q5_consequencia:  getSelectedText('q5'),
+    q6_pressao_escala: getScaleValue('q6'),
+    q7_como_resolve:  getSelectedText('q7'),
+    q8_dificuldade:   getSelectedText('q8'),
+    q9_reacao:        getSelectedText('q9'),
+    q10_feature:      getSelectedText('q10'),
+    q11_preco:        getPriceValue('q11'),
+    q12_canal:        getSelectedText('q12'),
+    q13_comentarios:  document.getElementById('q13').value || '',
+  };
 
-  // Show thank you + recommendations immediately (before fetch completes)
+  // 2. Now show thank you page
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('thankyou').style.display = 'block';
   document.getElementById('info-block').style.display = 'block';
   document.getElementById('progressBar').style.width = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Submit to Formspree in background via fetch — no page redirect
-  const form = document.getElementById('formArea');
-  const data = new FormData(form);
-  fetch(form.action, {
+  // 3. Send to Formspree as JSON (most reliable — no FormData DOM dependency)
+  fetch('https://formspree.io/f/mojydeyj', {
     method: 'POST',
-    body: data,
-    headers: { 'Accept': 'application/json' }
-  }).catch(function(err) {
-    console.warn('Formspree submission error:', err);
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(function(res) {
+    if (!res.ok) console.warn('Formspree returned status:', res.status);
+  })
+  .catch(function(err) {
+    console.warn('Formspree network error:', err);
   });
 
-  return false; // prevent native form submission (and Formspree redirect)
+  return false; // always prevent native form submit
 }
 
 const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
