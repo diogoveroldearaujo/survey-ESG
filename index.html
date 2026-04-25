@@ -31,6 +31,9 @@
 
   .container { max-width: 680px; margin: 0 auto; padding: 32px 24px 80px; }
 
+  .notice-banner { background: var(--accent-light); border: 1px solid var(--accent-mid); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 24px; color: var(--accent); font-size: 0.9rem; line-height: 1.5; text-align: center; }
+  .notice-banner strong { font-weight: 600; }
+
   .q-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 16px; box-shadow: var(--shadow); opacity: 0; transform: translateY(16px); transition: all 0.4s ease; }
   .q-card.visible { opacity: 1; transform: translateY(0); }
   .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
@@ -87,8 +90,8 @@
   .consent-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
   .consent-box strong { color: var(--text); }
 
-  /* ══ INFO + RECOMENDAÇÕES (pós-submissão) ══ */
-  #info-block { display: none; max-width: 680px; margin: 0 auto; padding: 0 24px 80px; }
+  /* ══ INFO + RECOMENDAÇÕES (AGORA VISÍVEIS) ══ */
+  #info-block { display: block; margin: 40px 0 20px; }
 
   .info-section-title {
     font-family: 'IBM Plex Mono', monospace;
@@ -96,7 +99,7 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    margin: 28px 0 14px;
+    margin: 40px 0 14px;
     padding-top: 4px;
     border-top: 2px solid var(--accent-light);
   }
@@ -203,7 +206,6 @@
     .price-grid { grid-template-columns: 1fr; }
     .scale-options { gap: 3px; }
     .container { padding: 24px 16px 60px; }
-    #info-block { padding: 0 16px 60px; }
     .ctx-card, .rec-card { padding: 18px 16px; }
   }
 </style>
@@ -224,11 +226,12 @@
   </div>
 </div>
 
-<form class="container" id="formArea" action="https://formspree.io/f/mojydeyj" method="POST">
-<input type="hidden" name="_subject" value="Survey PME — Nova resposta">
-<input type="hidden" name="_language" value="pt">
+<form class="container" id="formArea">
 
-  <!-- SECÇÃO A -->
+  <div class="notice-banner">
+    <strong>Aviso:</strong> O botão para submeter as suas respostas encontra-se no <strong>fundo desta página</strong>, logo após um breve bloco informativo sobre o contexto do reporte de sustentabilidade.
+  </div>
+
   <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
     <div class="sec-label">Secção A</div>
     <div class="sec-title">Perfil da Empresa</div>
@@ -279,7 +282,6 @@
     </div>
   </div>
 
-  <!-- SECÇÃO B -->
   <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
     <div class="sec-label">Secção B</div>
     <div class="sec-title">Pressão Regulatória ESG</div>
@@ -327,7 +329,6 @@
     </div>
   </div>
 
-  <!-- SECÇÃO C -->
   <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
     <div class="sec-label">Secção C</div>
     <div class="sec-title">Processo de Resposta Atual</div>
@@ -360,7 +361,6 @@
     </div>
   </div>
 
-  <!-- SECÇÃO D -->
   <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
     <div class="sec-label">Secção D</div>
     <div class="sec-title">Ferramenta de Reporte ESG</div>
@@ -392,7 +392,6 @@
     </div>
   </div>
 
-  <!-- SECÇÃO E -->
   <div class="section-divider q-card visible" style="background:var(--accent-light);border-color:var(--accent-mid);padding:20px 24px;">
     <div class="sec-label">Secção E</div>
     <div class="sec-title">Preço e Canal</div>
@@ -425,7 +424,6 @@
     </div>
   </div>
 
-  <!-- Q13 — Comentários (campo livre) -->
   <div class="q-card">
     <div class="q-num">Comentários adicionais (opcional)</div>
     <div class="q-text">Há algo que queira acrescentar sobre a pressão ESG que a sua empresa sente, ou sobre o que precisaria de uma ferramenta nesta área?</div>
@@ -433,137 +431,111 @@
     <textarea id="q13" name="q13_comentarios" rows="4" placeholder="Escreva aqui os seus comentários..."></textarea>
   </div>
 
-  <input type="hidden" id="hq2"  name="q2_dimensao"       value="">
-  <input type="hidden" id="hq3"  name="q3_fornecedor"     value="">
-  <input type="hidden" id="hq4"  name="q4_quem_pediu"     value="">
-  <input type="hidden" id="hq5"  name="q5_consequencia"   value="">
-  <input type="hidden" id="hq6"  name="q6_pressao_escala" value="">
-  <input type="hidden" id="hq7"  name="q7_como_resolve"   value="">
-  <input type="hidden" id="hq8"  name="q8_dificuldade"    value="">
-  <input type="hidden" id="hq9"  name="q9_reacao"         value="">
-  <input type="hidden" id="hq10" name="q10_feature"       value="">
-  <input type="hidden" id="hq11" name="q11_preco"         value="">
-  <input type="hidden" id="hq12" name="q12_canal"         value="">
 
-  <div class="consent-box">
+  <div id="info-block">
+    <div class="info-section-title">O que é o VSME e porque é que importa à sua empresa</div>
+
+    <div class="ctx-card">
+      <div class="ctx-card-title">O standard de sustentabilidade criado especificamente para PMEs</div>
+      <div class="ctx-card-body">
+        <p>Em Janeiro de 2024, a Comissão Europeia publicou o <strong>VSME — Voluntary Sustainability Reporting Standard for SMEs</strong>. É o único standard de sustentabilidade europeu desenhado a pensar em empresas como a sua: sem auditores externos, sem consultoras caras, sem formulários de 200 páginas.</p>
+        <div class="ctx-highlight">
+          O VSME é essencialmente um documento de 1-2 páginas que resume o desempenho ambiental, social e de governança da sua empresa — numa linguagem que bancos, grandes clientes e retalhistas conseguem ler e comparar com outros fornecedores.
+        </div>
+        <p>O standard tem dois módulos. O <strong>Módulo Básico</strong> (11 indicadores simples) é suficiente para responder à maioria dos pedidos de clientes e bancos. O <strong>Módulo Compreensivo</strong> é para quem precisa de responder a investidores ou grandes empresas mais exigentes. Para começar, o Básico chega.</p>
+        <p>E a boa notícia: para PMEs não cotadas, o VSME é <strong>auto-declaração</strong> — a empresa declara os dados com base nos seus próprios registos. Não precisa de auditor externo para validar.</p>
+      </div>
+    </div>
+
+    <div class="ctx-card">
+      <div class="ctx-card-title">As grandes empresas já são obrigadas a reportar. A pressão vai chegar às PMEs.</div>
+      <div class="ctx-card-body">
+        <p>Desde o final de 2025, as grandes empresas europeias (com mais de 500 trabalhadores) são obrigadas a publicar relatórios de sustentabilidade detalhados — é o chamado <strong>CSRD (Corporate Sustainability Reporting Directive)</strong>. A Sonae, a Jerónimo Martins, a Bosch, a Volkswagen, o Auchan — todas têm de reportar.</p>
+        <p>Para fazer esse relatório, uma grande empresa precisa de dados dos seus fornecedores. E esses fornecedores são, na maioria dos casos, PMEs. Isto cria o chamado <strong>efeito cascata</strong>: a obrigação das grandes empresas transforma-se em pressão sobre as PMEs fornecedoras.</p>
+        <div class="ctx-highlight">
+          O padrão histórico é claro: quando um grande retalhista introduz um novo requisito para fornecedores — seja qualidade, segurança alimentar ou práticas laborais — quem não está preparado perde o contrato. O ESG vai seguir o mesmo caminho.
+        </div>
+        <p>Os bancos estão a fazer o mesmo. Produtos de crédito "verde" com condições preferenciais já existem no BPI, Caixa e Santander — e ligam a taxa de juro ao desempenho de sustentabilidade da empresa. <strong>Ter um relatório VSME pode valer, literalmente, pontos percentuais na taxa de juro.</strong></p>
+
+        <table class="tl-table">
+          <tr>
+            <td>Jan 2024</td>
+            <td><strong>VSME publicado</strong> — standard europeu voluntário para PMEs entra em vigor</td>
+          </tr>
+          <tr>
+            <td>Fin. 2025</td>
+            <td><strong>CSRD obrigatório</strong> para empresas com +500 trabalhadores — começam a pedir dados ESG aos fornecedores PME</td>
+          </tr>
+          <tr>
+            <td>2026</td>
+            <td><strong>SAF-T anual obrigatório</strong> para todas as PMEs em Portugal — o ficheiro contabilístico que entregam à AT passa a incluir o plano de contas completo, base para o relatório VSME automático</td>
+          </tr>
+          <tr>
+            <td>2026–27</td>
+            <td><strong>Bancos e retalhistas</strong> tornam ESG requisito de contrato e de acesso a crédito preferencial</td>
+          </tr>
+          <tr>
+            <td>2028+</td>
+            <td><strong>Possível extensão</strong> da obrigação CSRD a PMEs — quem estiver preparado terá vantagem competitiva</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="info-section-title">3 coisas que pode fazer já, sem custo</div>
+
+    <div class="rec-card">
+      <div class="rec-card-tag">Acção imediata · Sem custo · 1 telefonema</div>
+      <div class="rec-card-title">Peça ao operador de resíduos o relatório anual com tonelagens</div>
+      <div class="rec-card-body">
+        O operador de resíduos (EGF, Valorsul, Amarsul, RESINORTE, etc.) é legalmente obrigado a emitir <strong>Guias de Acompanhamento de Resíduos (GAR)</strong> com o peso total por tipo de resíduo — perigoso e não perigoso. Um telefonema ou email é suficiente. Este documento cobre o indicador VSME de resíduos (B7) que os retalhistas mais valorizam, e que de outra forma seria difícil de quantificar.
+      </div>
+    </div>
+
+    <div class="rec-card amber">
+      <div class="rec-card-tag">Acção imediata · 5 minutos · Fale com o contabilista</div>
+      <div class="rec-card-title">Separe as sub-contas de energia no plano contabilístico</div>
+      <div class="rec-card-body">
+        Peça ao seu contabilista para criar sub-contas separadas para <strong>electricidade (6241)</strong>, <strong>combustíveis (6242)</strong> e <strong>água (6243)</strong> no próximo exercício. Com esta separação simples, qualquer ferramenta consegue calcular automaticamente o consumo em kWh, litros e m³ — e gerar os indicadores VSME de energia e emissões sem precisar de recolher dados adicionais. Sem esta separação, o cálculo é uma estimativa; com ela, é um dado exacto.
+      </div>
+    </div>
+
+    <div class="rec-card blue">
+      <div class="rec-card-tag">Informação importante · Desmistificar</div>
+      <div class="rec-card-title">O VSME Básico é mais simples do que parece — vários indicadores são uma linha</div>
+      <div class="rec-card-body">
+        Para a maioria das PMEs portuguesas, vários dos 11 indicadores do VSME Básico são triviais. O indicador <strong>B11 (Anti-Corrupção)</strong>: <em>"0 condenações por corrupção, €0 em coimas."</em> — uma linha. O indicador <strong>B10a (Salários acima do mínimo)</strong>: <em>"Sim, todos os trabalhadores recebem acima do SMN."</em> — uma linha. O que demora tempo é recolher os dados de energia, água e pessoal — mas esses já existem na contabilidade e nas facturas da empresa. <strong>O problema não é a complexidade do standard, é a dispersão dos dados.</strong>
+      </div>
+    </div>
+
+    <div class="rec-card red">
+      <div class="rec-card-tag">Atenção · Se é fornecedor de grandes empresas</div>
+      <div class="rec-card-title">Antecipe-se antes de receber o email a pedir o relatório</div>
+      <div class="rec-card-body">
+        Se a sua empresa fornece para cadeias de retalho ou grandes grupos industriais, a probabilidade de receber um pedido de dados ESG nos próximos 1-2 anos é alta. Grupos como a <strong>Sonae, Jerónimo Martins, Auchan, Continente</strong> e outros estão obrigados ao CSRD e precisam de dados dos seus fornecedores para o próprio relatório. Preparar-se agora — com os dados de energia, pessoal e resíduos organizados — é muito mais fácil do que responder a um pedido urgente com prazo de 2 semanas.
+      </div>
+    </div>
+
+    <div class="cta-final">
+      <p>Estamos a desenvolver uma ferramenta que transforma os dados contabilísticos que a sua empresa já tem num relatório VSME automático — sem formação técnica, em minutos. Se quiser saber mais ou ser avisado quando lançarmos:</p>
+      <a href="mailto:diogoveroldearaujo@gmail.com">diogoveroldearaujo@gmail.com</a>
+    </div>
+  </div><div class="consent-box">
     <strong>Privacidade:</strong> Este questionário é anónimo. Não recolhemos dados pessoais identificáveis. As respostas são usadas exclusivamente para investigação de mercado.
   </div>
 
   <div class="submit-area">
-    <button class="btn-submit" type="submit" onclick="return collectAndSubmit()">Submeter Questionário</button>
-    <div class="submit-note">Obrigado por participar. Após submeter, encontrará informação sobre o contexto regulatório e recomendações práticas.</div>
+    <button class="btn-submit" type="button" onclick="collectAndSubmit()">Submeter Questionário</button>
   </div>
 </form>
 
-<!-- ── OBRIGADO ── -->
 <div id="thankyou">
   <div class="ty-icon">✅</div>
   <div class="ty-title">Obrigado pela sua resposta!</div>
   <div class="ty-sub">A sua participação ajuda-nos a perceber se estamos a resolver um problema real para as PMEs portuguesas.<br><br>Caso pretenda obter mais informações, contacte-nos em <strong>diogoveroldearaujo@gmail.com</strong></div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════
-  BLOCO INFORMATIVO — aparece após submissão
-  Contexto CSRD/VSME + recomendações práticas
-═══════════════════════════════════════════════════════ -->
-<div id="info-block">
-
-  <!-- O QUE É O VSME -->
-  <div class="info-section-title">O que é o VSME e porque é que importa à sua empresa</div>
-
-  <div class="ctx-card">
-    <div class="ctx-card-title">O standard de sustentabilidade criado especificamente para PMEs</div>
-    <div class="ctx-card-body">
-      <p>Em Janeiro de 2024, a Comissão Europeia publicou o <strong>VSME — Voluntary Sustainability Reporting Standard for SMEs</strong>. É o único standard de sustentabilidade europeu desenhado a pensar em empresas como a sua: sem auditores externos, sem consultoras caras, sem formulários de 200 páginas.</p>
-      <div class="ctx-highlight">
-        O VSME é essencialmente um documento de 1-2 páginas que resume o desempenho ambiental, social e de governança da sua empresa — numa linguagem que bancos, grandes clientes e retalhistas conseguem ler e comparar com outros fornecedores.
-      </div>
-      <p>O standard tem dois módulos. O <strong>Módulo Básico</strong> (11 indicadores simples) é suficiente para responder à maioria dos pedidos de clientes e bancos. O <strong>Módulo Compreensivo</strong> é para quem precisa de responder a investidores ou grandes empresas mais exigentes. Para começar, o Básico chega.</p>
-      <p>E a boa notícia: para PMEs não cotadas, o VSME é <strong>auto-declaração</strong> — a empresa declara os dados com base nos seus próprios registos. Não precisa de auditor externo para validar.</p>
-    </div>
-  </div>
-
-  <!-- CSRD E O EFEITO CASCATA -->
-  <div class="ctx-card">
-    <div class="ctx-card-title">As grandes empresas já são obrigadas a reportar. A pressão vai chegar às PMEs.</div>
-    <div class="ctx-card-body">
-      <p>Desde o final de 2025, as grandes empresas europeias (com mais de 500 trabalhadores) são obrigadas a publicar relatórios de sustentabilidade detalhados — é o chamado <strong>CSRD (Corporate Sustainability Reporting Directive)</strong>. A Sonae, a Jerónimo Martins, a Bosch, a Volkswagen, o Auchan — todas têm de reportar.</p>
-      <p>Para fazer esse relatório, uma grande empresa precisa de dados dos seus fornecedores. E esses fornecedores são, na maioria dos casos, PMEs. Isto cria o chamado <strong>efeito cascata</strong>: a obrigação das grandes empresas transforma-se em pressão sobre as PMEs fornecedoras.</p>
-      <div class="ctx-highlight">
-        O padrão histórico é claro: quando um grande retalhista introduz um novo requisito para fornecedores — seja qualidade, segurança alimentar ou práticas laborais — quem não está preparado perde o contrato. O ESG vai seguir o mesmo caminho.
-      </div>
-      <p>Os bancos estão a fazer o mesmo. Produtos de crédito "verde" com condições preferenciais já existem no BPI, Caixa e Santander — e ligam a taxa de juro ao desempenho de sustentabilidade da empresa. <strong>Ter um relatório VSME pode valer, literalmente, pontos percentuais na taxa de juro.</strong></p>
-
-      <table class="tl-table">
-        <tr>
-          <td>Jan 2024</td>
-          <td><strong>VSME publicado</strong> — standard europeu voluntário para PMEs entra em vigor</td>
-        </tr>
-        <tr>
-          <td>Fin. 2025</td>
-          <td><strong>CSRD obrigatório</strong> para empresas com +500 trabalhadores — começam a pedir dados ESG aos fornecedores PME</td>
-        </tr>
-        <tr>
-          <td>2026</td>
-          <td><strong>SAF-T anual obrigatório</strong> para todas as PMEs em Portugal — o ficheiro contabilístico que entregam à AT passa a incluir o plano de contas completo, base para o relatório VSME automático</td>
-        </tr>
-        <tr>
-          <td>2026–27</td>
-          <td><strong>Bancos e retalhistas</strong> tornam ESG requisito de contrato e de acesso a crédito preferencial</td>
-        </tr>
-        <tr>
-          <td>2028+</td>
-          <td><strong>Possível extensão</strong> da obrigação CSRD a PMEs — quem estiver preparado terá vantagem competitiva</td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <!-- RECOMENDAÇÕES -->
-  <div class="info-section-title">3 coisas que pode fazer já, sem custo</div>
-
-  <div class="rec-card">
-    <div class="rec-card-tag">Acção imediata · Sem custo · 1 telefonema</div>
-    <div class="rec-card-title">Peça ao operador de resíduos o relatório anual com tonelagens</div>
-    <div class="rec-card-body">
-      O operador de resíduos (EGF, Valorsul, Amarsul, RESINORTE, etc.) é legalmente obrigado a emitir <strong>Guias de Acompanhamento de Resíduos (GAR)</strong> com o peso total por tipo de resíduo — perigoso e não perigoso. Um telefonema ou email é suficiente. Este documento cobre o indicador VSME de resíduos (B7) que os retalhistas mais valorizam, e que de outra forma seria difícil de quantificar.
-    </div>
-  </div>
-
-  <div class="rec-card amber">
-    <div class="rec-card-tag">Acção imediata · 5 minutos · Fale com o contabilista</div>
-    <div class="rec-card-title">Separe as sub-contas de energia no plano contabilístico</div>
-    <div class="rec-card-body">
-      Peça ao seu contabilista para criar sub-contas separadas para <strong>electricidade (6241)</strong>, <strong>combustíveis (6242)</strong> e <strong>água (6243)</strong> no próximo exercício. Com esta separação simples, qualquer ferramenta consegue calcular automaticamente o consumo em kWh, litros e m³ — e gerar os indicadores VSME de energia e emissões sem precisar de recolher dados adicionais. Sem esta separação, o cálculo é uma estimativa; com ela, é um dado exacto.
-    </div>
-  </div>
-
-  <div class="rec-card blue">
-    <div class="rec-card-tag">Informação importante · Desmistificar</div>
-    <div class="rec-card-title">O VSME Básico é mais simples do que parece — vários indicadores são uma linha</div>
-    <div class="rec-card-body">
-      Para a maioria das PMEs portuguesas, vários dos 11 indicadores do VSME Básico são triviais. O indicador <strong>B11 (Anti-Corrupção)</strong>: <em>"0 condenações por corrupção, €0 em coimas."</em> — uma linha. O indicador <strong>B10a (Salários acima do mínimo)</strong>: <em>"Sim, todos os trabalhadores recebem acima do SMN."</em> — uma linha. O que demora tempo é recolher os dados de energia, água e pessoal — mas esses já existem na contabilidade e nas facturas da empresa. <strong>O problema não é a complexidade do standard, é a dispersão dos dados.</strong>
-    </div>
-  </div>
-
-  <div class="rec-card red">
-    <div class="rec-card-tag">Atenção · Se é fornecedor de grandes empresas</div>
-    <div class="rec-card-title">Antecipe-se antes de receber o email a pedir o relatório</div>
-    <div class="rec-card-body">
-      Se a sua empresa fornece para cadeias de retalho ou grandes grupos industriais, a probabilidade de receber um pedido de dados ESG nos próximos 1-2 anos é alta. Grupos como a <strong>Sonae, Jerónimo Martins, Auchan, Continente</strong> e outros estão obrigados ao CSRD e precisam de dados dos seus fornecedores para o próprio relatório. Preparar-se agora — com os dados de energia, pessoal e resíduos organizados — é muito mais fácil do que responder a um pedido urgente com prazo de 2 semanas.
-    </div>
-  </div>
-
-  <!-- CTA FINAL -->
-  <div class="cta-final">
-    <p>Estamos a desenvolver uma ferramenta que transforma os dados contabilísticos que a sua empresa já tem num relatório VSME automático — sem formação técnica, em minutos. Se quiser saber mais ou ser avisado quando lançarmos:</p>
-    <a href="mailto:diogoveroldearaujo@gmail.com">diogoveroldearaujo@gmail.com</a>
-  </div>
-
-</div><!-- /info-block -->
-
 <script>
-// ── FIX 1: event.preventDefault() stops browser double-toggling checkboxes ──
 function selectOpt(el, group, multi, event) {
   if (event) event.preventDefault();
   if (!multi) {
@@ -617,7 +589,6 @@ function getPriceValue(id) {
   return s ? s.innerText.trim() : '';
 }
 
-// ── Submit: collect data FIRST, then hide form, then send ──────────────────
 function collectAndSubmit() {
   if (!document.getElementById('q1').value ||
       !document.querySelector('#q2 .selected') ||
@@ -627,11 +598,11 @@ function collectAndSubmit() {
       !document.querySelector('#q11 .selected') ||
       !document.querySelector('#q12 .selected')) {
     alert('Por favor responda a todas as perguntas obrigatórias (assinaladas com *) antes de submeter.');
-    return false;
+    return;
   }
 
-  // 1. Collect ALL data into a plain object BEFORE touching the DOM
   const payload = {
+    _subject:         "Survey PME — Nova resposta",
     q1_sector:        document.getElementById('q1').value,
     q2_dimensao:      getSelectedText('q2'),
     q3_fornecedor:    getSelectedText('q3'),
@@ -647,14 +618,13 @@ function collectAndSubmit() {
     q13_comentarios:  document.getElementById('q13').value || '',
   };
 
-  // 2. Now show thank you page
+  // 1. Esconde o formulário e mostra a página de obrigado
   document.getElementById('formArea').style.display = 'none';
   document.getElementById('thankyou').style.display = 'block';
-  document.getElementById('info-block').style.display = 'block';
   document.getElementById('progressBar').style.width = '100%';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // 3. Send to Formspree as JSON (most reliable — no FormData DOM dependency)
+  // 2. Envia para o Formspree
   fetch('https://formspree.io/f/mojydeyj', {
     method: 'POST',
     headers: {
@@ -669,8 +639,6 @@ function collectAndSubmit() {
   .catch(function(err) {
     console.warn('Formspree network error:', err);
   });
-
-  return false; // always prevent native form submit
 }
 
 const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
