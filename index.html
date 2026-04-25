@@ -80,13 +80,7 @@
   .submit-area { margin-top: 32px; }
   .btn-submit { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
   .btn-submit:hover { opacity: 0.88; }
-  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
   .submit-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
-
-  #thankyou { display: none; text-align: center; padding: 60px 24px 32px; max-width: 680px; margin: 0 auto; }
-  .ty-icon { font-size: 3rem; margin-bottom: 20px; }
-  .ty-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; }
-  .ty-sub { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
 
   .consent-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
   .consent-box strong { color: var(--text); }
@@ -140,7 +134,9 @@
   </div>
 </div>
 
-<form class="container" id="formArea">
+<form class="container" id="formArea" action="https://formspree.io/f/mojydeyj" method="POST" onsubmit="return prepareFormData(event)">
+  <input type="hidden" name="_subject" value="Survey PME — Nova resposta">
+  <input type="hidden" name="_language" value="pt">
 
   <div class="notice-banner">
     <strong>Aviso:</strong> O botão para submeter as suas respostas encontra-se no <strong>fundo desta página</strong>, logo após um breve bloco informativo sobre o contexto do reporte de sustentabilidade.
@@ -417,20 +413,26 @@
       <p>Estamos a desenvolver uma ferramenta que transforma os dados contabilísticos que a sua empresa já tem num relatório VSME automático — sem formação técnica, em minutos. Se quiser saber mais ou ser avisado quando lançarmos:</p>
       <a href="mailto:diogoveroldearaujo@gmail.com">diogoveroldearaujo@gmail.com</a>
     </div>
-  </div><div class="consent-box">
+  </div><input type="hidden" id="hq2"  name="q2_dimensao"       value="">
+  <input type="hidden" id="hq3"  name="q3_fornecedor"     value="">
+  <input type="hidden" id="hq4"  name="q4_quem_pediu"     value="">
+  <input type="hidden" id="hq5"  name="q5_consequencia"   value="">
+  <input type="hidden" id="hq6"  name="q6_pressao_escala" value="">
+  <input type="hidden" id="hq7"  name="q7_como_resolve"   value="">
+  <input type="hidden" id="hq8"  name="q8_dificuldade"    value="">
+  <input type="hidden" id="hq9"  name="q9_reacao"         value="">
+  <input type="hidden" id="hq10" name="q10_feature"       value="">
+  <input type="hidden" id="hq11" name="q11_preco"         value="">
+  <input type="hidden" id="hq12" name="q12_canal"         value="">
+
+  <div class="consent-box">
     <strong>Privacidade:</strong> Este questionário é anónimo. Não recolhemos dados pessoais identificáveis. As respostas são usadas exclusivamente para investigação de mercado.
   </div>
 
   <div class="submit-area">
-    <button class="btn-submit" type="button" onclick="collectAndSubmit()">Submeter Questionário</button>
+    <button class="btn-submit" type="submit">Submeter Questionário</button>
   </div>
 </form>
-
-<div id="thankyou">
-  <div class="ty-icon">✅</div>
-  <div class="ty-title">Obrigado pela sua resposta!</div>
-  <div class="ty-sub">A sua participação ajuda-nos a perceber se estamos a resolver um problema real para as PMEs portuguesas.<br><br>Caso pretenda obter mais informações, contacte-nos em <strong>diogoveroldearaujo@gmail.com</strong></div>
-</div>
 
 <script>
 function selectOpt(el, group, multi, event) {
@@ -486,8 +488,9 @@ function getPriceValue(id) {
   return s ? s.innerText.trim() : '';
 }
 
-function collectAndSubmit() {
-  // 1. Validar campos obrigatórios
+// ESTA FUNÇÃO CORRE APENAS ANTES DO NAVEGADOR ENVIAR A INFORMAÇÃO
+function prepareFormData(event) {
+  // 1. Validar se os campos obrigatórios estão preenchidos
   if (!document.getElementById('q1').value ||
       !document.querySelector('#q2 .selected') ||
       !document.querySelector('#q3 .selected') ||
@@ -495,61 +498,27 @@ function collectAndSubmit() {
       !document.querySelector('#q9 .selected') ||
       !document.querySelector('#q11 .selected') ||
       !document.querySelector('#q12 .selected')) {
+    
     alert('Por favor responda a todas as perguntas obrigatórias (assinaladas com *) antes de submeter.');
-    return;
+    event.preventDefault(); // Impede o formulário de ser enviado
+    return false;
   }
 
-  // 2. Mudar o botão para "A enviar..." para dar feedback
-  const btn = document.querySelector('.btn-submit');
-  const originalText = btn.innerText;
-  btn.innerText = 'A enviar...';
-  btn.disabled = true;
+  // 2. Se estiver tudo bem, copia a informação visual para os campos escondidos reais
+  document.getElementById('hq2').value = getSelectedText('q2');
+  document.getElementById('hq3').value = getSelectedText('q3');
+  document.getElementById('hq4').value = getSelectedTexts('q4');
+  document.getElementById('hq5').value = getSelectedText('q5');
+  document.getElementById('hq6').value = getScaleValue('q6');
+  document.getElementById('hq7').value = getSelectedText('q7');
+  document.getElementById('hq8').value = getSelectedText('q8');
+  document.getElementById('hq9').value = getSelectedText('q9');
+  document.getElementById('hq10').value = getSelectedText('q10');
+  document.getElementById('hq11').value = getPriceValue('q11');
+  document.getElementById('hq12').value = getSelectedText('q12');
 
-  // 3. Preparar os dados no formato FormData (Standard web que o Formspree reconhece a 100%)
-  const formData = new FormData();
-  formData.append('_subject', 'Survey PME — Nova resposta');
-  formData.append('_language', 'pt');
-  formData.append('q1_sector', document.getElementById('q1').value);
-  formData.append('q2_dimensao', getSelectedText('q2'));
-  formData.append('q3_fornecedor', getSelectedText('q3'));
-  formData.append('q4_quem_pediu', getSelectedTexts('q4'));
-  formData.append('q5_consequencia', getSelectedText('q5'));
-  formData.append('q6_pressao_escala', getScaleValue('q6'));
-  formData.append('q7_como_resolve', getSelectedText('q7'));
-  formData.append('q8_dificuldade', getSelectedText('q8'));
-  formData.append('q9_reacao', getSelectedText('q9'));
-  formData.append('q10_feature', getSelectedText('q10'));
-  formData.append('q11_preco', getPriceValue('q11'));
-  formData.append('q12_canal', getSelectedText('q12'));
-  formData.append('q13_comentarios', document.getElementById('q13').value || '');
-
-  // 4. Enviar os dados
-  fetch('https://formspree.io/f/mojydeyj', {
-    method: 'POST',
-    body: formData,
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(function(response) {
-    if (response.ok) {
-      // 5. SÓ SE O ENVIO FUNCIONAR é que esconde o formulário e diz Obrigado
-      document.getElementById('formArea').style.display = 'none';
-      document.getElementById('thankyou').style.display = 'block';
-      document.getElementById('progressBar').style.width = '100%';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      alert('Ocorreu um erro a guardar os dados. Por favor, tente novamente.');
-      btn.innerText = originalText;
-      btn.disabled = false;
-    }
-  })
-  .catch(function(error) {
-    alert('Erro de ligação. Verifique a sua internet e tente novamente.');
-    btn.innerText = originalText;
-    btn.disabled = false;
-    console.error('Formspree erro:', error);
-  });
+  // 3. Deixa o formulário seguir naturalmente para o Formspree (redirecionando a página!)
+  return true;
 }
 
 const obs = new IntersectionObserver(e => e.forEach(el => { if(el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
