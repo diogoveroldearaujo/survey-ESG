@@ -80,6 +80,7 @@
   .submit-area { margin-top: 32px; }
   .btn-submit { width: 100%; padding: 16px; background: var(--accent); color: white; border: none; border-radius: var(--radius); font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
   .btn-submit:hover { opacity: 0.88; }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
   .submit-note { font-size: 0.78rem; color: var(--muted); text-align: center; margin-top: 12px; line-height: 1.6; }
 
   #thankyou { display: none; text-align: center; padding: 60px 24px 32px; max-width: 680px; margin: 0 auto; }
@@ -90,124 +91,37 @@
   .consent-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 16px; margin-bottom: 20px; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
   .consent-box strong { color: var(--text); }
 
-  /* ══ INFO + RECOMENDAÇÕES (AGORA VISÍVEIS) ══ */
   #info-block { display: block; margin: 40px 0 20px; }
-
-  .info-section-title {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 40px 0 14px;
-    padding-top: 4px;
-    border-top: 2px solid var(--accent-light);
-  }
-
-  .ctx-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 26px 30px;
-    box-shadow: var(--shadow);
-    margin-bottom: 14px;
-  }
-  .ctx-card-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.4;
-  }
-  .ctx-card-body {
-    font-size: 0.875rem;
-    color: var(--muted);
-    line-height: 1.75;
-  }
+  .info-section-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 40px 0 14px; padding-top: 4px; border-top: 2px solid var(--accent-light); }
+  .ctx-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 30px; box-shadow: var(--shadow); margin-bottom: 14px; }
+  .ctx-card-title { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
+  .ctx-card-body { font-size: 0.875rem; color: var(--muted); line-height: 1.75; }
   .ctx-card-body strong { color: var(--text); }
   .ctx-card-body p + p { margin-top: 10px; }
-  .ctx-highlight {
-    background: var(--accent-light);
-    border-left: 3px solid var(--accent);
-    padding: 12px 16px;
-    margin: 14px 0;
-    border-radius: 0 4px 4px 0;
-    font-size: 0.875rem;
-    color: var(--text);
-    line-height: 1.65;
-  }
-
+  .ctx-highlight { background: var(--accent-light); border-left: 3px solid var(--accent); padding: 12px 16px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 0.875rem; color: var(--text); line-height: 1.65; }
   .tl-table { margin-top: 16px; width: 100%; border-collapse: collapse; }
   .tl-table tr { border-bottom: 1px solid var(--border); }
   .tl-table tr:last-child { border-bottom: none; }
   .tl-table td { padding: 9px 0; vertical-align: top; font-size: 0.845rem; }
-  .tl-table td:first-child {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 500;
-    color: var(--accent);
-    white-space: nowrap;
-    padding-right: 20px;
-    min-width: 70px;
-  }
+  .tl-table td:first-child { font-family: 'IBM Plex Mono', monospace; font-size: 0.75rem; font-weight: 500; color: var(--accent); white-space: nowrap; padding-right: 20px; min-width: 70px; }
   .tl-table td:last-child { color: var(--muted); line-height: 1.6; }
   .tl-table td:last-child strong { color: var(--text); }
-
-  .rec-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    margin-bottom: 12px;
-    box-shadow: var(--shadow);
-  }
+  .rec-card { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 12px; box-shadow: var(--shadow); }
   .rec-card.amber { border-left-color: #D97706; }
   .rec-card.blue  { border-left-color: #1D4ED8; }
   .rec-card.red   { border-left-color: #DC2626; }
-  .rec-card-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
+  .rec-card-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .rec-card.amber .rec-card-tag { color: #D97706; }
   .rec-card.blue  .rec-card-tag { color: #1D4ED8; }
   .rec-card.red   .rec-card-tag { color: #DC2626; }
   .rec-card-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 7px; }
   .rec-card-body  { font-size: 0.845rem; color: var(--muted); line-height: 1.7; }
   .rec-card-body strong { color: var(--text); }
-
-  .cta-final {
-    background: var(--accent);
-    border-radius: var(--radius);
-    padding: 28px 30px;
-    text-align: center;
-    margin-top: 8px;
-  }
+  .cta-final { background: var(--accent); border-radius: var(--radius); padding: 28px 30px; text-align: center; margin-top: 8px; }
   .cta-final p { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.65; margin-bottom: 16px; }
-  .cta-final a {
-    display: inline-block;
-    background: white;
-    color: var(--accent);
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 11px 26px;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: opacity 0.2s;
-  }
+  .cta-final a { display: inline-block; background: white; color: var(--accent); font-weight: 600; font-size: 0.875rem; padding: 11px 26px; border-radius: 6px; text-decoration: none; transition: opacity 0.2s; }
   .cta-final a:hover { opacity: 0.88; }
-
-  @media(max-width:600px){
-    .q-card { padding: 20px 18px; }
-    .price-grid { grid-template-columns: 1fr; }
-    .scale-options { gap: 3px; }
-    .container { padding: 24px 16px 60px; }
-    .ctx-card, .rec-card { padding: 18px 16px; }
-  }
+  @media(max-width:600px){ .q-card { padding: 20px 18px; } .price-grid { grid-template-columns: 1fr; } .scale-options { gap: 3px; } .container { padding: 24px 16px 60px; } .ctx-card, .rec-card { padding: 18px 16px; } }
 </style>
 </head>
 <body>
@@ -431,10 +345,8 @@
     <textarea id="q13" name="q13_comentarios" rows="4" placeholder="Escreva aqui os seus comentários..."></textarea>
   </div>
 
-
   <div id="info-block">
     <div class="info-section-title">O que é o VSME e porque é que importa à sua empresa</div>
-
     <div class="ctx-card">
       <div class="ctx-card-title">O standard de sustentabilidade criado especificamente para PMEs</div>
       <div class="ctx-card-body">
@@ -458,26 +370,11 @@
         <p>Os bancos estão a fazer o mesmo. Produtos de crédito "verde" com condições preferenciais já existem no BPI, Caixa e Santander — e ligam a taxa de juro ao desempenho de sustentabilidade da empresa. <strong>Ter um relatório VSME pode valer, literalmente, pontos percentuais na taxa de juro.</strong></p>
 
         <table class="tl-table">
-          <tr>
-            <td>Jan 2024</td>
-            <td><strong>VSME publicado</strong> — standard europeu voluntário para PMEs entra em vigor</td>
-          </tr>
-          <tr>
-            <td>Fin. 2025</td>
-            <td><strong>CSRD obrigatório</strong> para empresas com +500 trabalhadores — começam a pedir dados ESG aos fornecedores PME</td>
-          </tr>
-          <tr>
-            <td>2026</td>
-            <td><strong>SAF-T anual obrigatório</strong> para todas as PMEs em Portugal — o ficheiro contabilístico que entregam à AT passa a incluir o plano de contas completo, base para o relatório VSME automático</td>
-          </tr>
-          <tr>
-            <td>2026–27</td>
-            <td><strong>Bancos e retalhistas</strong> tornam ESG requisito de contrato e de acesso a crédito preferencial</td>
-          </tr>
-          <tr>
-            <td>2028+</td>
-            <td><strong>Possível extensão</strong> da obrigação CSRD a PMEs — quem estiver preparado terá vantagem competitiva</td>
-          </tr>
+          <tr><td>Jan 2024</td><td><strong>VSME publicado</strong> — standard europeu voluntário para PMEs entra em vigor</td></tr>
+          <tr><td>Fin. 2025</td><td><strong>CSRD obrigatório</strong> para empresas com +500 trabalhadores — começam a pedir dados ESG aos fornecedores PME</td></tr>
+          <tr><td>2026</td><td><strong>SAF-T anual obrigatório</strong> para todas as PMEs em Portugal — o ficheiro contabilístico que entregam à AT passa a incluir o plano de contas completo, base para o relatório VSME automático</td></tr>
+          <tr><td>2026–27</td><td><strong>Bancos e retalhistas</strong> tornam ESG requisito de contrato e de acesso a crédito preferencial</td></tr>
+          <tr><td>2028+</td><td><strong>Possível extensão</strong> da obrigação CSRD a PMEs — quem estiver preparado terá vantagem competitiva</td></tr>
         </table>
       </div>
     </div>
@@ -590,6 +487,7 @@ function getPriceValue(id) {
 }
 
 function collectAndSubmit() {
+  // 1. Validar campos obrigatórios
   if (!document.getElementById('q1').value ||
       !document.querySelector('#q2 .selected') ||
       !document.querySelector('#q3 .selected') ||
@@ -601,43 +499,56 @@ function collectAndSubmit() {
     return;
   }
 
-  const payload = {
-    _subject:         "Survey PME — Nova resposta",
-    q1_sector:        document.getElementById('q1').value,
-    q2_dimensao:      getSelectedText('q2'),
-    q3_fornecedor:    getSelectedText('q3'),
-    q4_quem_pediu:    getSelectedTexts('q4'),
-    q5_consequencia:  getSelectedText('q5'),
-    q6_pressao_escala: getScaleValue('q6'),
-    q7_como_resolve:  getSelectedText('q7'),
-    q8_dificuldade:   getSelectedText('q8'),
-    q9_reacao:        getSelectedText('q9'),
-    q10_feature:      getSelectedText('q10'),
-    q11_preco:        getPriceValue('q11'),
-    q12_canal:        getSelectedText('q12'),
-    q13_comentarios:  document.getElementById('q13').value || '',
-  };
+  // 2. Mudar o botão para "A enviar..." para dar feedback
+  const btn = document.querySelector('.btn-submit');
+  const originalText = btn.innerText;
+  btn.innerText = 'A enviar...';
+  btn.disabled = true;
 
-  // 1. Esconde o formulário e mostra a página de obrigado
-  document.getElementById('formArea').style.display = 'none';
-  document.getElementById('thankyou').style.display = 'block';
-  document.getElementById('progressBar').style.width = '100%';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // 3. Preparar os dados no formato FormData (Standard web que o Formspree reconhece a 100%)
+  const formData = new FormData();
+  formData.append('_subject', 'Survey PME — Nova resposta');
+  formData.append('_language', 'pt');
+  formData.append('q1_sector', document.getElementById('q1').value);
+  formData.append('q2_dimensao', getSelectedText('q2'));
+  formData.append('q3_fornecedor', getSelectedText('q3'));
+  formData.append('q4_quem_pediu', getSelectedTexts('q4'));
+  formData.append('q5_consequencia', getSelectedText('q5'));
+  formData.append('q6_pressao_escala', getScaleValue('q6'));
+  formData.append('q7_como_resolve', getSelectedText('q7'));
+  formData.append('q8_dificuldade', getSelectedText('q8'));
+  formData.append('q9_reacao', getSelectedText('q9'));
+  formData.append('q10_feature', getSelectedText('q10'));
+  formData.append('q11_preco', getPriceValue('q11'));
+  formData.append('q12_canal', getSelectedText('q12'));
+  formData.append('q13_comentarios', document.getElementById('q13').value || '');
 
-  // 2. Envia para o Formspree
+  // 4. Enviar os dados
   fetch('https://formspree.io/f/mojydeyj', {
     method: 'POST',
+    body: formData,
     headers: {
-      'Content-Type': 'application/json',
       'Accept': 'application/json'
-    },
-    body: JSON.stringify(payload)
+    }
   })
-  .then(function(res) {
-    if (!res.ok) console.warn('Formspree returned status:', res.status);
+  .then(function(response) {
+    if (response.ok) {
+      // 5. SÓ SE O ENVIO FUNCIONAR é que esconde o formulário e diz Obrigado
+      document.getElementById('formArea').style.display = 'none';
+      document.getElementById('thankyou').style.display = 'block';
+      document.getElementById('progressBar').style.width = '100%';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      alert('Ocorreu um erro a guardar os dados. Por favor, tente novamente.');
+      btn.innerText = originalText;
+      btn.disabled = false;
+    }
   })
-  .catch(function(err) {
-    console.warn('Formspree network error:', err);
+  .catch(function(error) {
+    alert('Erro de ligação. Verifique a sua internet e tente novamente.');
+    btn.innerText = originalText;
+    btn.disabled = false;
+    console.error('Formspree erro:', error);
   });
 }
 
